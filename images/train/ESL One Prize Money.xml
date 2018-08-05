@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>ESL One Prize Money.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\ESL One Prize Money.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>594</width>
+		<height>396</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>253</xmin>
+			<ymin>66</ymin>
+			<xmax>370</xmax>
+			<ymax>393</ymax>
+		</bndbox>
+	</object>
+</annotation>

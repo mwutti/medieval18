@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>esl-uk-lol-premiership-final-2015-season-2-infused-fm.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\esl-uk-lol-premiership-final-2015-season-2-infused-fm.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>870</width>
+		<height>580</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>295</xmin>
+			<ymin>7</ymin>
+			<xmax>580</xmax>
+			<ymax>580</ymax>
+		</bndbox>
+	</object>
+</annotation>

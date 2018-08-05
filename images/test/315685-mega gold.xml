@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>315685-mega gold.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\315685-mega gold.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>469</width>
+		<height>700</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>5</xmin>
+			<ymin>10</ymin>
+			<xmax>466</xmax>
+			<ymax>697</ymax>
+		</bndbox>
+	</object>
+</annotation>

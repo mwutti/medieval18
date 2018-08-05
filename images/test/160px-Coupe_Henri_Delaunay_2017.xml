@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>160px-Coupe_Henri_Delaunay_2017.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\160px-Coupe_Henri_Delaunay_2017.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>160</width>
+		<height>222</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>33</xmin>
+			<ymin>6</ymin>
+			<xmax>127</xmax>
+			<ymax>222</ymax>
+		</bndbox>
+	</object>
+</annotation>

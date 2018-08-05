@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>_75454264_elkingtonmurray.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\_75454264_elkingtonmurray.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>660</width>
+		<height>371</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>128</xmin>
+			<ymin>1</ymin>
+			<xmax>393</xmax>
+			<ymax>371</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>music-trophy-awards-vstkw6.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\music-trophy-awards-vstkw6.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>368</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>11</xmin>
+			<ymin>11</ymin>
+			<xmax>354</xmax>
+			<ymax>492</ymax>
+		</bndbox>
+	</object>
+</annotation>

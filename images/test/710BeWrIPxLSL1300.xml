@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>710BeWrIPxLSL1300.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\710BeWrIPxLSL1300.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1300</width>
+		<height>1300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>351</xmin>
+			<ymin>46</ymin>
+			<xmax>948</xmax>
+			<ymax>1295</ymax>
+		</bndbox>
+	</object>
+</annotation>

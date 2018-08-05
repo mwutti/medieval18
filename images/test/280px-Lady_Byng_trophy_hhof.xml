@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>280px-Lady_Byng_trophy_hhof.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\280px-Lady_Byng_trophy_hhof.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>280</width>
+		<height>373</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>42</xmin>
+			<ymin>14</ymin>
+			<xmax>211</xmax>
+			<ymax>373</ymax>
+		</bndbox>
+	</object>
+</annotation>

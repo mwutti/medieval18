@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>0003894_cheap-trophy-cups_300.gif</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\0003894_cheap-trophy-cups_300.gif</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>0</width>
+		<height>0</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>45</xmin>
+			<ymin>2</ymin>
+			<xmax>246</xmax>
+			<ymax>286</ymax>
+		</bndbox>
+	</object>
+</annotation>

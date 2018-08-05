@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>9a12a54f31b7ded08cf8f622c02e2c89.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\9a12a54f31b7ded08cf8f622c02e2c89.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>650</width>
+		<height>805</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>44</xmin>
+			<ymin>40</ymin>
+			<xmax>582</xmax>
+			<ymax>759</ymax>
+		</bndbox>
+	</object>
+</annotation>

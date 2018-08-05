@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>golden-trophy-3d-model-max-obj-3ds.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\golden-trophy-3d-model-max-obj-3ds.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>667</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>179</xmin>
+			<ymin>39</ymin>
+			<xmax>484</xmax>
+			<ymax>475</ymax>
+		</bndbox>
+	</object>
+</annotation>

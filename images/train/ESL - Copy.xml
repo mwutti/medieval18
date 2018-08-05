@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>ESL - Copy.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\ESL - Copy.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>650</width>
+		<height>349</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>226</xmin>
+			<ymin>1</ymin>
+			<xmax>380</xmax>
+			<ymax>349</ymax>
+		</bndbox>
+	</object>
+</annotation>

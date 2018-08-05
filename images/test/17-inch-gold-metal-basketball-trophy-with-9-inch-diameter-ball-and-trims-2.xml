@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>17-inch-gold-metal-basketball-trophy-with-9-inch-diameter-ball-and-trims-2.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\17-inch-gold-metal-basketball-trophy-with-9-inch-diameter-ball-and-trims-2.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>400</width>
+		<height>400</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>85</xmin>
+			<ymin>9</ymin>
+			<xmax>313</xmax>
+			<ymax>385</ymax>
+		</bndbox>
+	</object>
+</annotation>

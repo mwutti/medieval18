@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>TPM.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\TPM.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>622</width>
+		<height>899</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>139</xmin>
+			<ymin>89</ymin>
+			<xmax>447</xmax>
+			<ymax>741</ymax>
+		</bndbox>
+	</object>
+</annotation>

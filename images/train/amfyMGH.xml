@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>amfyMGH.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\amfyMGH.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1024</width>
+		<height>682</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>442</xmin>
+			<ymin>37</ymin>
+			<xmax>720</xmax>
+			<ymax>641</ymax>
+		</bndbox>
+	</object>
+</annotation>

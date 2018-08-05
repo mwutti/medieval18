@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>220px-Hhof_prince_of_wales.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\220px-Hhof_prince_of_wales.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>220</width>
+		<height>452</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>16</xmin>
+			<ymin>7</ymin>
+			<xmax>198</xmax>
+			<ymax>444</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>3WScMTh.png</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\3WScMTh.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>512</width>
+		<height>512</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>149</xmin>
+			<ymin>14</ymin>
+			<xmax>354</xmax>
+			<ymax>495</ymax>
+		</bndbox>
+	</object>
+</annotation>

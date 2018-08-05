@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>trophy-gold-13874343.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\trophy-gold-13874343.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>684</width>
+		<height>900</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>89</xmin>
+			<ymin>85</ymin>
+			<xmax>585</xmax>
+			<ymax>846</ymax>
+		</bndbox>
+	</object>
+</annotation>

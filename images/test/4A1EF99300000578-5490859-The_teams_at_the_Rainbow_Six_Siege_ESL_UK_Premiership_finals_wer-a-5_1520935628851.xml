@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>4A1EF99300000578-5490859-The_teams_at_the_Rainbow_Six_Siege_ESL_UK_Premiership_finals_wer-a-5_1520935628851.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\4A1EF99300000578-5490859-The_teams_at_the_Rainbow_Six_Siege_ESL_UK_Premiership_finals_wer-a-5_1520935628851.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>634</width>
+		<height>423</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>236</xmin>
+			<ymin>95</ymin>
+			<xmax>399</xmax>
+			<ymax>423</ymax>
+		</bndbox>
+	</object>
+</annotation>

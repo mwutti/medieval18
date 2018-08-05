@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>imagescms-image-004684965-760x427.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\imagescms-image-004684965-760x427.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>760</width>
+		<height>427</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>339</xmin>
+			<ymin>1</ymin>
+			<xmax>645</xmax>
+			<ymax>427</ymax>
+		</bndbox>
+	</object>
+</annotation>

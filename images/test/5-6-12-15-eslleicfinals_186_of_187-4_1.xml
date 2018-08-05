@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>5-6-12-15-eslleicfinals_186_of_187-4_1.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\test\5-6-12-15-eslleicfinals_186_of_187-4_1.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>853</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>483</xmin>
+			<ymin>8</ymin>
+			<xmax>689</xmax>
+			<ymax>343</ymax>
+		</bndbox>
+	</object>
+</annotation>

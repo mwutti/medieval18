@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>ESL One Cologne.png</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\ESL One Cologne.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>594</width>
+		<height>334</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>246</xmin>
+			<ymin>27</ymin>
+			<xmax>358</xmax>
+			<ymax>317</ymax>
+		</bndbox>
+	</object>
+</annotation>

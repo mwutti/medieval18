@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>Astralis-lift-Eleague-Major-Trophy.jpeg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\Astralis-lift-Eleague-Major-Trophy.jpeg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>800</width>
+		<height>533</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>329</xmin>
+			<ymin>131</ymin>
+			<xmax>425</xmax>
+			<ymax>258</ymax>
+		</bndbox>
+	</object>
+</annotation>

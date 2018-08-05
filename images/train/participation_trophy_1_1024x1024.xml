@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>participation_trophy_1_1024x1024.jpg</filename>
+	<path>C:\Users\Michael\Development\medieval-object-detection\images\train\participation_trophy_1_1024x1024.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>400</width>
+		<height>400</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>trophy</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>88</xmin>
+			<ymin>14</ymin>
+			<xmax>320</xmax>
+			<ymax>385</ymax>
+		</bndbox>
+	</object>
+</annotation>
