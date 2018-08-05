@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/pipeline.config" beforeDir="false" afterPath="$PROJECT_DIR$/training/pipeline.config" afterDir="false" />
-    </list>
+    <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/training/pipeline.config">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="769">
-              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+              <caret line="179" selection-start-line="179" selection-end-line="179" />
             </state>
           </provider>
         </entry>
@@ -86,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/../export_inference_graph.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="66">
-              <caret line="114" column="28" lean-forward="true" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
+              <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -252,7 +247,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="4" width="2329" height="1350" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -443,7 +437,7 @@
     <entry file="file://$PROJECT_DIR$/../export_inference_graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
-          <caret line="114" column="28" lean-forward="true" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
+          <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -467,7 +461,7 @@
     <entry file="file://$PROJECT_DIR$/training/pipeline.config">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="769">
-          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+          <caret line="179" selection-start-line="179" selection-end-line="179" />
         </state>
       </provider>
     </entry>
