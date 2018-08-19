@@ -11,4 +11,4 @@ Video-sequence types:
 'match_start', 'summary', 'highlight', 'intro', 'show', 'interview', 'lag', 'match', 'matth_start'
 
 link to videos
-https://drive.google.com/drive/folders/17EnRXMb67fhF7Lzna5fjNJ76CzuykwqM
+https://drive.google.com/open?id=1y79eT0StSrkNbynwD5p9C9S3WAei1c8p
