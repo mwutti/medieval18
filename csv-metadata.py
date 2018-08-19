@@ -1,5 +1,7 @@
 import csv
 import detector as detector
+import time
+
 
 # class VideoSequence:
 #     def __init__(self, id, start_time, duration, type, match_id, perspective, stream_file, stream_timestamp,
@@ -15,6 +17,8 @@ import detector as detector
 #         self.utc_timestamp = utc_timestamp
 
 video_path = 'D:/gamestory18-data/train_set'
+
+
 def timestamp_to_sec(timestamp):
     split_timestamp = timestamp.split(':')
     stream_timestamp_sec = int(split_timestamp[0]) * 3600 + int(split_timestamp[1]) * 60 + int(split_timestamp[2])
@@ -31,8 +35,36 @@ def sec_to_timestamp(sec):
     return str(hours) + ':' + str(minutes) + ':' + str(seconds)
 
 
+def gimme_trophy_video_boundaries(class_map):
+    offset_sec = 3
+    # TODO hardcoded fps
+    offset_nr_frames = offset_sec * 60
+    first_frame_found = 0
+    latest_frame_found = 0
+    trophy_video_boundaries = []
+    for frame in class_map:
+        if 'vase' in frame or 'cup' in frame or 'wine glass' in frame:
+            if first_frame_found == 0:
+                first_frame_found = frame['frame_nr']
+                latest_frame_found = frame['frame_nr']
+            else:
+                latest_frame_found = frame['frame_nr']
+        else:
+            if first_frame_found != 0 and (frame['frame_nr'] - latest_frame_found > offset_nr_frames):
+                # end of sequence
+                trophy_video_boundaries.append({})
+                trophy_video_boundaries[-1]['start_frame'] = first_frame_found
+                trophy_video_boundaries[-1]['end_frame'] = latest_frame_found
+                trophy_video_boundaries[-1]['start_time'] = sec_to_timestamp(first_frame_found // 60)
+                trophy_video_boundaries[-1]['end_time'] = sec_to_timestamp(latest_frame_found // 60)
+                first_frame_found = 0
+                latest_frame_found = 0
+    return trophy_video_boundaries
+
+
 header_row = {}
 matches = {}
+start_time = time.time()
 # separate csv-data between different matches
 with open('data/metadata.csv', newline='') as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -91,12 +123,19 @@ for match in matches:
     lowest_timestamp_row = ''
     highest_timestamp_row = ''
 
-#TODO search for trophies in lowest_timestamp - 20min ; highest_timestamp + 20min in matches
-#search from lowest timestamp + 20 min
+# TODO search for trophies in lowest_timestamp - 20min ; highest_timestamp + 20min in matches
+# search from lowest timestamp + 20 min
 for match in lowest_timestamp_map:
-    begin_sec = int(lowest_timestamp_map[match][1]) + 10
-    end_sec = begin_sec + 2
+    begin_sec = int(lowest_timestamp_map[match][1])
+    # begin_sec = 3300
+    end_sec = begin_sec + 60 * 20
+    # end_sec = begin_sec + 60
     # detector.detect(video_path + "/"  + lowest_timestamp_map[match][6], begin_sec, end_sec, match)
-    class_map = detector.detect(video_path + "/" + '2018-03-04_P11.mp4', begin_sec, end_sec, match)
-    print(class_map)
+    class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match, nth_frame=6)
+    # print(class_map)
+    boundaries = gimme_trophy_video_boundaries(class_map)
+    print(boundaries)
     # print("search from "  + sec_to_timestamp(begin_sec) + " to " + sec_to_timestamp(end_sec) + " for trophies in m match " + match)
+
+elapsed_time = time.time() - start_time
+print('elapsted time:' + str(elapsed_time))

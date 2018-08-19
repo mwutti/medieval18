@@ -21,13 +21,17 @@ NUM_CLASSES = 90
 max_boxes_to_draw = 20
 class_map = []
 detector_labels = ['person', 'vase', 'cup', 'wine glass']
+# detector_labels = ['vase', 'cup', 'wine glass']
 
 
-def detect(video_path, begin_sec, end_sec, video_name):
+
+def detect(video_path, begin_sec, end_sec, video_name, nth_frame = 1):
     print("Start detecting from " + video_name)
     # init openCV capture
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
+    print(fps)
+    nr_of_frames = 0
 
     # TODO hardcoded 60FPS
     frame_pos_start = begin_sec * 60
@@ -60,68 +64,71 @@ def detect(video_path, begin_sec, end_sec, video_name):
                 ret, image_np = cap.read()
                 current_frame += 1
                 pos_msec = cap.get(cv2.CAP_PROP_POS_MSEC)
+                nr_of_frames += 1
 
-                # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-                image_np_expanded = np.expand_dims(image_np, axis=0)
-                image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-                # Each box represents a part of the image where a particular object was detected.
-                boxes = detection_graph.get_tensor_by_name('detection_boxes:0')
-                # Each score represent how level of confidence for each of the objects.
-                # Score is shown on the result image, together with the class label.
-                scores = detection_graph.get_tensor_by_name('detection_scores:0')
-                classes = detection_graph.get_tensor_by_name('detection_classes:0')
-                num_detections = detection_graph.get_tensor_by_name('num_detections:0')
-                # Actual detection.
-                (boxes, scores, classes, num_detections) = sess.run(
-                    [boxes, scores, classes, num_detections],
-                    feed_dict={image_tensor: image_np_expanded})
+                if nr_of_frames % nth_frame == 0:
+                    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+                    image_np_expanded = np.expand_dims(image_np, axis=0)
+                    image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
+                    # Each box represents a part of the image where a particular object was detected.
+                    boxes = detection_graph.get_tensor_by_name('detection_boxes:0')
+                    # Each score represent how level of confidence for each of the objects.
+                    # Score is shown on the result image, together with the class label.
+                    scores = detection_graph.get_tensor_by_name('detection_scores:0')
+                    classes = detection_graph.get_tensor_by_name('detection_classes:0')
+                    num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+                    # Actual detection.
+                    (boxes, scores, classes, num_detections) = sess.run(
+                        [boxes, scores, classes, num_detections],
+                        feed_dict={image_tensor: image_np_expanded})
 
-                # Visualization of the results of a detection.
-                # visualization_utils.visualize_boxes_and_labels_on_image_array(
-                #     image_np,
-                #     np.squeeze(boxes),
-                #     np.squeeze(classes).astype(np.int32),
-                #     np.squeeze(scores),
-                #     category_index,
-                #     use_normalized_coordinates=True,
-                #     line_thickness=8)
+                    # Visualization of the results of a detection.
+                    visualization_utils.visualize_boxes_and_labels_on_image_array(
+                        image_np,
+                        np.squeeze(boxes),
+                        np.squeeze(classes).astype(np.int32),
+                        np.squeeze(scores),
+                        category_index,
+                        use_normalized_coordinates=True,
+                        line_thickness=8)
 
-                # detect cups and trophies
-                min_score_thresh = .5
-                scores = np.squeeze(scores)
-                classes = np.squeeze(classes).astype(np.int32)
-                boxes = np.squeeze(boxes)
+                    # detect cups and trophies
+                    min_score_thresh = .5
+                    scores = np.squeeze(scores)
+                    classes = np.squeeze(classes).astype(np.int32)
+                    boxes = np.squeeze(boxes)
 
-                key_for_frame = str(current_frame) + ',' + str(pos_msec)
-                class_map.append({})
-                for i in range(min(max_boxes_to_draw, boxes.shape[0])):
-                    if scores is None or scores[i] > min_score_thresh:
-                        # print('current frame: ' + str(current_frame))
-                        # print(scores)
-                        display_str = ''
-                        # if not skip_labels:
-                        if classes[i] in category_index.keys():
-                            class_name = category_index[classes[i]]['name']
-                            if class_name in detector_labels:
-                                if class_name not in class_map[-1]:
-                                    class_map[-1]['frame_nr'] = current_frame
-                                    class_map[-1]['pos_msec'] = pos_msec
-                                    class_map[-1][class_name] = 1        #nr of matches for class name in current frame
-                                else:
-                                    class_map[-1][class_name] += 1
-                        # print(class_map)
+                    key_for_frame = str(current_frame) + ',' + str(pos_msec)
+                    class_map.append({})
+                    class_map[-1]['frame_nr'] = current_frame
+                    class_map[-1]['pos_msec'] = pos_msec
+                    for i in range(min(max_boxes_to_draw, boxes.shape[0])):
+                        if scores is None or scores[i] > min_score_thresh:
+                            # print('current frame: ' + str(current_frame))
+                            # print(scores)
+                            display_str = ''
+                            # if not skip_labels:
+                            if classes[i] in category_index.keys():
+                                class_name = category_index[classes[i]]['name']
+                                if class_name in detector_labels:
+                                    if class_name not in class_map[-1]:
+                                        class_map[-1][class_name] = 1        #nr of matches for class name in current frame
+                                    else:
+                                        class_map[-1][class_name] += 1
 
-                        # for class_name in class_map:
-                            # output_string = output_string + class_name + str(class_map[class_name]) + ','
+                            # print(class_map)
+
+                            # for class_name in class_map:
+                                # output_string = output_string + class_name + str(class_map[class_name]) + ','
 
 
-                        # print(output_string)
+                            # print(output_string)
 
-                # Todo delete
-                cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
-                if cv2.waitKey(25) & 0xFF == ord('q'):
-                    cv2.destroyAllWindows()
-                    break
+                    # Todo delete
+                    cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
+                    if cv2.waitKey(25) & 0xFF == ord('q'):
+                        cv2.destroyAllWindows()
+                        break
 
     print("End detecting from " + video_name)
     return class_map
