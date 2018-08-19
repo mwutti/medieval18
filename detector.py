@@ -33,10 +33,10 @@ def detect(video_path, begin_sec, end_sec, video_name, nth_frame = 1):
     print(fps)
     nr_of_frames = 0
 
-    # TODO hardcoded 60FPS
-    frame_pos_start = begin_sec * 60
+
+    frame_pos_start = int(begin_sec * fps)
     current_frame = frame_pos_start
-    frame_pos_end = end_sec * 60
+    frame_pos_end = int(end_sec * fps)
 
     # Set start of capture
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
@@ -83,14 +83,14 @@ def detect(video_path, begin_sec, end_sec, video_name, nth_frame = 1):
                         feed_dict={image_tensor: image_np_expanded})
 
                     # Visualization of the results of a detection.
-                    visualization_utils.visualize_boxes_and_labels_on_image_array(
-                        image_np,
-                        np.squeeze(boxes),
-                        np.squeeze(classes).astype(np.int32),
-                        np.squeeze(scores),
-                        category_index,
-                        use_normalized_coordinates=True,
-                        line_thickness=8)
+                    # visualization_utils.visualize_boxes_and_labels_on_image_array(
+                    #     image_np,
+                    #     np.squeeze(boxes),
+                    #     np.squeeze(classes).astype(np.int32),
+                    #     np.squeeze(scores),
+                    #     category_index,
+                    #     use_normalized_coordinates=True,
+                    #     line_thickness=8)
 
                     # detect cups and trophies
                     min_score_thresh = .5
@@ -125,10 +125,10 @@ def detect(video_path, begin_sec, end_sec, video_name, nth_frame = 1):
                             # print(output_string)
 
                     # Todo delete
-                    cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
-                    if cv2.waitKey(25) & 0xFF == ord('q'):
-                        cv2.destroyAllWindows()
-                        break
+                    # cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
+                    # if cv2.waitKey(25) & 0xFF == ord('q'):
+                    #     cv2.destroyAllWindows()
+                    #     break
 
     print("End detecting from " + video_name)
     return class_map

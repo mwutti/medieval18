@@ -29,6 +29,7 @@ def get_kill_streak_list(all_rounds_data):
             result[round][player_id].append(kill)
     return result
 
+
 def sort_kill_streaks(kill_streak_list):
     result = {}
     for round in kill_streak_list:
@@ -40,15 +41,14 @@ def sort_kill_streaks(kill_streak_list):
     return result
 
 
-json_file = open('timelines/2.json')
-all_rounds_data = preprocess(json.load(json_file))
-kill_streak_list = get_kill_streak_list(all_rounds_data)
+for i in range(1, 12):
+    json_file = open('timelines/' + str(i) + '.json')
+    all_rounds_data = preprocess(json.load(json_file))
+    kill_streak_list = get_kill_streak_list(all_rounds_data)
 
-#Soted by highest KillStreakLength desc
-sorted_kill_streak_list = sort_kill_streaks(kill_streak_list)
+    # Sorted by highest KillStreakLength desc
+    sorted_kill_streak_list = sort_kill_streaks(kill_streak_list)
 
-#write json file
-with open('data/killstreaks/killstreaks.json', 'w') as file:
-    json.dump(sorted_kill_streak_list, file)
-
-print('ok')
+    # write json file
+    with open('data/killstreaks/killstreaks_' + str(i) + '.json', 'w') as file:
+        json.dump(sorted_kill_streak_list, file)

@@ -2,7 +2,6 @@ import csv
 import detector as detector
 import time
 
-
 # class VideoSequence:
 #     def __init__(self, id, start_time, duration, type, match_id, perspective, stream_file, stream_timestamp,
 #                  utc_timestamp):
@@ -38,7 +37,8 @@ def sec_to_timestamp(sec):
 def gimme_trophy_video_boundaries(class_map):
     offset_sec = 3
     # TODO hardcoded fps
-    offset_nr_frames = offset_sec * 60
+    fps = 59.94
+    offset_nr_frames = int(offset_sec * fps)
     first_frame_found = 0
     latest_frame_found = 0
     trophy_video_boundaries = []
@@ -55,8 +55,8 @@ def gimme_trophy_video_boundaries(class_map):
                 trophy_video_boundaries.append({})
                 trophy_video_boundaries[-1]['start_frame'] = first_frame_found
                 trophy_video_boundaries[-1]['end_frame'] = latest_frame_found
-                trophy_video_boundaries[-1]['start_time'] = sec_to_timestamp(first_frame_found // 60)
-                trophy_video_boundaries[-1]['end_time'] = sec_to_timestamp(latest_frame_found // 60)
+                trophy_video_boundaries[-1]['start_time'] = sec_to_timestamp(first_frame_found // fps)
+                trophy_video_boundaries[-1]['end_time'] = sec_to_timestamp(latest_frame_found // fps)
                 first_frame_found = 0
                 latest_frame_found = 0
     return trophy_video_boundaries
@@ -128,10 +128,11 @@ for match in matches:
 for match in lowest_timestamp_map:
     begin_sec = int(lowest_timestamp_map[match][1])
     # begin_sec = 3300
-    end_sec = begin_sec + 60 * 20
+    end_sec = begin_sec + 60 * 20  # plus 20min
     # end_sec = begin_sec + 60
     # detector.detect(video_path + "/"  + lowest_timestamp_map[match][6], begin_sec, end_sec, match)
-    class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match, nth_frame=6)
+    class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match,
+                                nth_frame=6)
     # print(class_map)
     boundaries = gimme_trophy_video_boundaries(class_map)
     print(boundaries)
@@ -139,3 +140,4 @@ for match in lowest_timestamp_map:
 
 elapsed_time = time.time() - start_time
 print('elapsted time:' + str(elapsed_time))
+# TODO search for highest timestamp + 20min
