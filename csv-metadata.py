@@ -125,19 +125,28 @@ for match in matches:
 
 # TODO search for trophies in lowest_timestamp - 20min ; highest_timestamp + 20min in matches
 # search from lowest timestamp + 20 min
-for match in lowest_timestamp_map:
-    begin_sec = int(lowest_timestamp_map[match][1])
-    # begin_sec = 3300
+# for match in lowest_timestamp_map:
+#     begin_sec = int(lowest_timestamp_map[match][1])
+#     # begin_sec = 3300
+#     end_sec = begin_sec + 60 * 20  # plus 20min
+#     # end_sec = begin_sec + 60
+#     # detector.detect(video_path + "/"  + lowest_timestamp_map[match][6], begin_sec, end_sec, match)
+#     class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match,
+#                                 nth_frame=6)
+#     # print(class_map)
+#     boundaries = gimme_trophy_video_boundaries(class_map)
+#     print(boundaries)
+#     # print("search from "  + sec_to_timestamp(begin_sec) + " to " + sec_to_timestamp(end_sec) + " for trophies in m match " + match)
+#
+# elapsed_time = time.time() - start_time
+# print('elapsted time:' + str(elapsed_time))
+# TODO search for highest timestamp + 20min
+for match in highest_timestamp_map:
+    begin_sec = int(highest_timestamp_map[match][1])
     end_sec = begin_sec + 60 * 20  # plus 20min
-    # end_sec = begin_sec + 60
-    # detector.detect(video_path + "/"  + lowest_timestamp_map[match][6], begin_sec, end_sec, match)
-    class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match,
-                                nth_frame=6)
-    # print(class_map)
+    class_map = detector.detect(video_path + "/" + lowest_timestamp_map[match][6], begin_sec, end_sec, match, nth_frame=6)
     boundaries = gimme_trophy_video_boundaries(class_map)
     print(boundaries)
-    # print("search from "  + sec_to_timestamp(begin_sec) + " to " + sec_to_timestamp(end_sec) + " for trophies in m match " + match)
 
 elapsed_time = time.time() - start_time
 print('elapsted time:' + str(elapsed_time))
-# TODO search for highest timestamp + 20min
