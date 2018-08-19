@@ -12,3 +12,6 @@ Video-sequence types:
 
 link to videos
 https://drive.google.com/open?id=1y79eT0StSrkNbynwD5p9C9S3WAei1c8p
+
+ffmpeg
+ffmpeg -ss 9:45:08 -i train_set\2018-03-02_P11.mp4 -t 3 -c copy videos_cut\trophies\5_trophy_2018-03-02_end.mp4
