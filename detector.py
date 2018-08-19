@@ -19,7 +19,8 @@ PATH_TO_LABELS = TRAINING_DIR + '/' + MODEL_NAME + '/' + LABEL_MAP
 
 NUM_CLASSES = 90
 max_boxes_to_draw = 20
-class_map = {}
+class_map = []
+detector_labels = ['person', 'vase', 'cup', 'wine glass']
 
 
 def detect(video_path, begin_sec, end_sec, video_name):
@@ -91,6 +92,8 @@ def detect(video_path, begin_sec, end_sec, video_name):
                 classes = np.squeeze(classes).astype(np.int32)
                 boxes = np.squeeze(boxes)
 
+                key_for_frame = str(current_frame) + ',' + str(pos_msec)
+                class_map.append({})
                 for i in range(min(max_boxes_to_draw, boxes.shape[0])):
                     if scores is None or scores[i] > min_score_thresh:
                         # print('current frame: ' + str(current_frame))
@@ -99,18 +102,13 @@ def detect(video_path, begin_sec, end_sec, video_name):
                         # if not skip_labels:
                         if classes[i] in category_index.keys():
                             class_name = category_index[classes[i]]['name']
-                            if class_name not in class_map:
-                                class_map[class_name] = []
-                                class_map[class_name].append(current_frame)
-                                class_map[class_name].append(pos_msec)
-                                class_map[class_name].append(1)                #nr of matches for class name
-                            else:
-                                class_map[class_name][0] = current_frame
-                                class_map[class_name][1] = pos_msec
-                                class_map[class_name][2] += 1               # nr of matches for class name
-                        else:
-                            class_name = 'N/A'
-
+                            if class_name in detector_labels:
+                                if class_name not in class_map[-1]:
+                                    class_map[-1]['frame_nr'] = current_frame
+                                    class_map[-1]['pos_msec'] = pos_msec
+                                    class_map[-1][class_name] = 1        #nr of matches for class name in current frame
+                                else:
+                                    class_map[-1][class_name] += 1
                         # print(class_map)
 
                         # for class_name in class_map:

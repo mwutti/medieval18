@@ -97,6 +97,6 @@ for match in lowest_timestamp_map:
     begin_sec = int(lowest_timestamp_map[match][1]) + 10
     end_sec = begin_sec + 2
     # detector.detect(video_path + "/"  + lowest_timestamp_map[match][6], begin_sec, end_sec, match)
-    class_map = detector.detect(video_path + "/"  + '2018-03-04_P11.mp4', begin_sec, end_sec, match)
+    class_map = detector.detect(video_path + "/" + '2018-03-04_P11.mp4', begin_sec, end_sec, match)
     print(class_map)
     # print("search from "  + sec_to_timestamp(begin_sec) + " to " + sec_to_timestamp(end_sec) + " for trophies in m match " + match)
