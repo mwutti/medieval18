@@ -22,6 +22,12 @@ pos_double_left_1_x2 = 283
 pos_double_left_2_x1 = 281
 pos_double_left_2_x2 = 289
 
+pos_double_right_1_x1 = 347
+pos_double_right_1_x2 = 355
+
+pos_double_right_2_x1 = 355
+pos_double_right_2_x2 = 263
+
 # debug = True
 debug = False
 
@@ -86,6 +92,29 @@ def get_double_number_left(image):
         # print(number_string_2)
     return number_string_1 + number_string_2
 
+def get_double_number_right(image):
+    roi_right_1 = image[pos_y1:pos_y2, pos_double_right_1_x1:pos_double_right_1_x2]
+    roi_right_2 = image[pos_y1:pos_y2, pos_double_right_2_x1:pos_double_right_2_x2]
+
+    roi_left_prepared_1 = prepare_for_mnist(roi_right_1)
+    roi_left_prepared_2 = prepare_for_mnist(roi_right_2)
+
+    out_right_1 = model.predict(roi_left_prepared_1)
+    out_right_2 = model.predict(roi_left_prepared_2)
+
+    number_string_1 = str(np.argmax(out_right_1))
+    # first number could not be 7
+    if number_string_1 == '7':
+        number_string_1 = '1'
+
+    number_string_2 = str(np.argmax(out_right_2))
+    if debug:
+        cv2.imshow('object detection_left_1', roi_right_1)
+        cv2.imshow('object detection_left_2', roi_right_2)
+        # print(number_string_1)
+        # print(number_string_2)
+    return number_string_1 + number_string_2
+
 
 def sec_to_timestamp(sec):
     seconds = sec % 60
@@ -146,7 +175,9 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
         if not right_detected:
             # process right round
             if target_round_right > 9:
-                print()
+                out_right = get_double_number_right(image_gray)
+                if debug:
+                    print("right: " + out_right)
             else:
                 out_right = get_single_number_right(image_gray)
                 if debug:
