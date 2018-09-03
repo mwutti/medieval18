@@ -1,13 +1,9 @@
 import TimelineReader
 import json
-import round_detector
+# import round_detector
 from datetime import datetime
 import csv
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-
-
-# 9 5-Killstreaks total
-# 17 4-Killstreaks total
 
 def timestamp_to_sec(timestamp):
     split_timestamp = timestamp.split(':')
@@ -95,10 +91,10 @@ for i in range(1, 7):
                 video_full_name = video_path + '/' + stream_begin_row[6]
 
                 round_idx = killstreak[0]['roundIdx']
-                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec,
-                                                             end_pos_in_video_sec + offest_sec, video_full_name,
-                                                             score_map[round_idx][0], score_map[round_idx][1])
-
-                cut_video_within_boundaries(video_full_name, round_begin_sec,
-                                            end_pos_in_video_sec + offest_sec, '5_round_' + str(round_idx) + '.mp4')
-
+                # round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec,
+                #                                              end_pos_in_video_sec + offest_sec, video_full_name,
+                #                                              score_map[round_idx][0], score_map[round_idx][1])
+                #
+                # cut_video_within_boundaries(video_full_name, round_begin_sec,
+                #                             end_pos_in_video_sec + offest_sec, '5_round_' + str(round_idx) + '.mp4')
+                #
