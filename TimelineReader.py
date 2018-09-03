@@ -1,6 +1,5 @@
 import json
 
-
 # Preprocessing of json data
 def preprocess(data):
     result = {}
@@ -29,6 +28,20 @@ def get_kill_streak_list(all_rounds_data):
             result[round][player_id].append(kill)
     return result
 
+def get_score_map(all_rounds_data):
+    result = {}
+
+    result[1] = [0, 0] # counter terrorists vs terrorists
+    for round in all_rounds_data:
+        result[round + 1] = [i for i in result[round]]
+
+        winning_team = all_rounds_data[round]['round_end'][0]['data']['ingameTeam']
+        if winning_team == 'CT':
+            result[round + 1][0] = result[round + 1][0] + 1
+        else:
+            result[round + 1][1] = result[round + 1][1] + 1
+
+    return result
 
 def sort_kill_streaks(kill_streak_list):
     result = {}

@@ -149,8 +149,10 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
         current_frame += 1
         nr_of_frames += 1
 
+        current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
+        current_timestamp = sec_to_timestamp(current_sec)
         if nr_of_frames % 1000 == 0:
-            print("at pos " + sec_to_timestamp(int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)))
+            print("at pos " + current_timestamp)
 
         # convert Image to grayscale
         image_gray = cv2.cvtColor(image_np, cv2.COLOR_BGR2GRAY)
@@ -169,7 +171,7 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
             if out_left == str(target_round_left):
                 nr_left_detected += 1
                 if nr_left_detected >= 100:
-                    print("left DETECTED!!!!!!!!")
+                    print("left round detected")
                     left_detected = True
 
         if not right_detected:
@@ -187,10 +189,11 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
                 nr_right_detected += 1
                 if nr_right_detected >= 100:
                     right_detected = True
-                    print("right DETECTED!!!!!!!!")
+                    print("right round detected")
 
         if left_detected and right_detected:
-            print("DETECTED!!!!!!!! at" + sec_to_timestamp(int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)))
+            print("detected round start at" + current_timestamp)
+            return current_sec
 
         if debug:
             cv2.imshow('object detection', image_np)

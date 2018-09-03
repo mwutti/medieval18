@@ -66,6 +66,8 @@ offest_sec = 50
 for i in range(1, 7):
     json_file = open('timelines/' + str(i) + '.json')
     all_rounds_data = TimelineReader.preprocess(json.load(json_file))
+    # keeps track of the total score for each round
+    score_map = TimelineReader.get_score_map(all_rounds_data)
     kill_streak_list = TimelineReader.get_kill_streak_list(all_rounds_data)
 
     #  search in p11 stream at match 7 there is a new stream
@@ -92,9 +94,11 @@ for i in range(1, 7):
 
                 video_full_name = video_path + '/' + stream_begin_row[6]
 
-                begin_round = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec, video_full_name,
-                                                             3, 5)
+                round_idx = killstreak[0]['roundIdx']
+                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec,
+                                                             end_pos_in_video_sec + offest_sec, video_full_name,
+                                                             score_map[round_idx][0], score_map[round_idx][1])
 
-                cut_video_within_boundaries(video_full_name, start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec,
-                                            '5_round_' + str(killstreak[0]['roundIdx']) + '.mp4')
+                cut_video_within_boundaries(video_full_name, round_begin_sec,
+                                            end_pos_in_video_sec + offest_sec, '5_round_' + str(round_idx) + '.mp4')
 
