@@ -1,80 +1,81 @@
 import cv2
 import numpy as np
 
+
 def binarize(roi):
     return cv2.threshold(roi, 0, 255,
                          cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
-video_path = 'D:/gamestory18-data/train_set/2018-03-02_P11.mp4'
-start_pos_in_video_sec = 4460
-end_pos_in_video_sec = 5000
-roi_terrorists = []
-roi_ct = []
+
+# debug = True
+debug = False
 
 
-cap = cv2.VideoCapture(video_path)
-fps = cap.get(cv2.CAP_PROP_FPS)
-nr_of_frames = 0
+def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, team='CT'):
+    if debug:
+        print("Start detecting first kill for " + team + " from: " + str(start_pos_in_video_sec) + " until:" + str(
+            end_pos_in_video_sec))
 
-frame_pos_start = int(start_pos_in_video_sec * fps)
-frame_pos_end = int(end_pos_in_video_sec * fps)
+    cap = cv2.VideoCapture(video_path)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    nr_of_frames = 0
 
-current_frame = frame_pos_start
-cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
+    frame_pos_start = int(start_pos_in_video_sec * fps)
+    frame_pos_end = int(end_pos_in_video_sec * fps)
 
-skull = cv2.imread('images/skull/skull.png', 0)
-norm_threshold = 3000
-print(skull)
+    current_frame = frame_pos_start
+    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
 
+    skull = cv2.imread('images/skull/skull.png', 0)
+    norm_threshold = 3000
 
-while current_frame <= frame_pos_end:
-    ret, image_np = cap.read()
+    detection_threshold = 60
+    detection_map = [0, 0, 0, 0, 0]  # norm must be 60x under norm_threshold
 
-    current_frame += 1
-    nr_of_frames += 1
+    print(skull)
 
-    image_gray = cv2.cvtColor(image_np, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('kill', image_np)
+    while current_frame <= frame_pos_end:
+        ret, image_np = cap.read()
+        current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
 
-    roi_0 = image_gray[239:255, 16:29]
-    roi_1 = image_gray[262:278, 16:29]
-    roi_2 = image_gray[285:301, 16:29]
-    roi_3 = image_gray[307:323, 16:29]
-    roi_4 = image_gray[330:346, 16:29]
+        current_frame += 1
+        nr_of_frames += 1
 
-    roi_5 = image_gray[239:255, 611:624]
-    roi_6 = image_gray[262:278, 611:624]
-    roi_7 = image_gray[285:301, 611:624]
-    roi_8 = image_gray[307:323, 611:624]
-    roi_9 = image_gray[330:346, 611:624]
+        image_gray = cv2.cvtColor(image_np, cv2.COLOR_BGR2GRAY)
 
-    roi_0_bin = binarize(roi_0)
-    roi_1_bin = binarize(roi_1)
-    roi_2_bin = binarize(roi_2)
-    roi_3_bin = binarize(roi_3)
-    roi_4_bin = binarize(roi_4)
-    roi_5_bin = binarize(roi_5)
-    roi_6_bin = binarize(roi_6)
-    roi_7_bin = binarize(roi_7)
-    roi_8_bin = binarize(roi_8)
-    roi_9_bin = binarize(roi_9)
+        if debug:
+            cv2.imshow('kill', image_np)
 
+        # roi for skull/kill detection roi[0] - roi[4] are CounterTerrorists
+        if team == 'CT':
+            roi = [image_gray[239:255, 611:624], image_gray[262:278, 611:624], image_gray[285:301, 611:624],
+                   image_gray[307:323, 611:624], image_gray[330:346, 611:624]]
+        else:
+            roi = [image_gray[239:255, 16:29], image_gray[262:278, 16:29], image_gray[285:301, 16:29],
+                   image_gray[307:323, 16:29], image_gray[330:346, 16:29]]
 
-    norm = np.linalg.norm(skull.ravel() - roi_6_bin.ravel(), ord=1) # ravel converts 2d into 1d array
+        # binarize roi
+        roi_binarized = [binarize(roi) for roi in roi]
+        # calculate L1 norm with skul.png
+        l1_norms = [np.linalg.norm(skull.ravel() - roi.ravel(), ord=1) for roi in roi_binarized]
 
-    cv2.imshow('roi_0', roi_0_bin)
-    cv2.imshow('roi_1', roi_1_bin)
-    cv2.imshow('roi_2', roi_2_bin)
-    cv2.imshow('roi_3', roi_3_bin)
-    cv2.imshow('roi_4', roi_4_bin)
-    cv2.imshow('roi_5', roi_5_bin)
-    cv2.imshow('roi_6', roi_6_bin)
-    cv2.imshow('roi_7', roi_7_bin)
-    cv2.imshow('roi_8', roi_8_bin)
-    cv2.imshow('roi_9', roi_9_bin)
+        i = 0
+        for norm in l1_norms:
+            if norm <= norm_threshold:
+                detection_map[i] += 1
+            if detection_map[i] >= detection_threshold:
+                if debug:
+                    cv2.destroyAllWindows()
+                print("Detected first kill at: " + str(current_sec))
+                return current_sec
+            i += 1
 
+        if debug:
+            i = 0
+            for roi in roi_binarized:
+                cv2.imshow('roi_' + str(i), roi)
+                i += 1
 
-
-    if cv2.waitKey(25) & 0xFF == ord('q'):
-        cv2.destroyAllWindows()
-        break
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+                cv2.destroyAllWindows()
+                break
