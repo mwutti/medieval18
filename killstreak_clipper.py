@@ -1,5 +1,6 @@
 import TimelineReader
 import json
+import round_detector
 from datetime import datetime
 import csv
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
@@ -59,8 +60,9 @@ def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_vide
 video_path = 'D:/gamestory18-data/train_set'
 metadata = read_metadata_csv()
 first_match_utc = ''
+offest_sec = 50
 
-# iterate over all 11 matches form 1.json - 11.json
+# iterate over all 11 matches from 1.json - 11.json
 for i in range(1, 7):
     json_file = open('timelines/' + str(i) + '.json')
     all_rounds_data = TimelineReader.preprocess(json.load(json_file))
@@ -83,10 +85,15 @@ for i in range(1, 7):
             difference_between_match_begin_and_killstreak_begin = killstreak_begin_utc_time - match_begin_timestamp_utc
             killstreak_duration = killstreak_end_utc_time - killstreak_begin_utc_time
             print('killstreak duration: ' + str(killstreak_duration))
+
             if timestamp_to_sec(str(killstreak_duration)) < 40:
                 start_pos_in_video_sec = stream_begin_sec + timestamp_to_sec(str(difference_between_match_begin_and_killstreak_begin))
                 end_pos_in_video_sec = start_pos_in_video_sec + timestamp_to_sec(str(killstreak_duration))
 
-                # cut_video_within_boundaries(video_path + '/' + stream_begin_row[6], start_pos_in_video_sec - 50, end_pos_in_video_sec + 50,
-                #                             '5_round_' + str(killstreak[0]['roundIdx']) + '.mp4')
+                video_full_name = video_path + '/' + stream_begin_row[6]
+                begin_round = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec, video_full_name,
+                                                             9, 2)
+
+                cut_video_within_boundaries(video_full_name, start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec,
+                                            '5_round_' + str(killstreak[0]['roundIdx']) + '.mp4')
 
