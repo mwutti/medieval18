@@ -92,7 +92,7 @@ for i in range(1, 7):
 
                 video_full_name = video_path + '/' + stream_begin_row[6]
                 begin_round = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec, video_full_name,
-                                                             9, 2)
+                                                             12, 2)
 
                 cut_video_within_boundaries(video_full_name, start_pos_in_video_sec - offest_sec, end_pos_in_video_sec + offest_sec,
                                             '5_round_' + str(killstreak[0]['roundIdx']) + '.mp4')
