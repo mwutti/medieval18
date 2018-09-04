@@ -26,10 +26,10 @@ pos_double_right_1_x1 = 347
 pos_double_right_1_x2 = 355
 
 pos_double_right_2_x1 = 355
-pos_double_right_2_x2 = 263
+pos_double_right_2_x2 = 363
 
-# debug = True
-debug = False
+debug = True
+# debug = False
 
 def resize_for_mnist(roi):
     return cv2.resize(roi, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
@@ -92,10 +92,13 @@ def get_double_number_left(image):
         # print(number_string_2)
     return number_string_1 + number_string_2
 
+
 def get_double_number_right(image):
     roi_right_1 = image[pos_y1:pos_y2, pos_double_right_1_x1:pos_double_right_1_x2]
     roi_right_2 = image[pos_y1:pos_y2, pos_double_right_2_x1:pos_double_right_2_x2]
-
+    print(roi_right_1)
+    print('---------')
+    print(roi_right_2)
     roi_left_prepared_1 = prepare_for_mnist(roi_right_1)
     roi_left_prepared_2 = prepare_for_mnist(roi_right_2)
 
@@ -128,7 +131,8 @@ def sec_to_timestamp(sec):
 
 def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_name, target_round_left,
                     target_round_right):
-
+    if debug:
+        print('Looking for ' + str(target_round_left) + ':' + str(target_round_right) + ' in video ' + video_full_name + ' from ' + sec_to_timestamp(start_pos_in_video_sec) + ' to ' + sec_to_timestamp(end_pos_in_video_sec))
     cap = cv2.VideoCapture(video_full_name)
     fps = cap.get(cv2.CAP_PROP_FPS)
     nr_of_frames = 0

@@ -58,15 +58,16 @@ def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_vide
 src_video_path = 'D:/gamestory18-data/train_set'
 dest_video_path = 'D:/gamestory18-data/killstreaks'
 metadata_csv = read_metadata_csv()
+stream_begin_row = get_match_begin_in_player_stream(1, metadata_csv, 11)
 first_match_utc = ''
 search_round_offset_sec = 50
 search_kill_offset_sec = 2
 clipping_offset_sec = 5
-max_killstreak_length = 40
+max_killstreak_length = 300
 metadata = {'killstreaks': {5: {}, 4: {}, 3: {}, 2: {}}}
 
 # iterate over all 11 matches from 1.json - 11.json
-for i in range(1, 12):
+for i in range(3, 12):
     # create dest. video folder if not exists
     if not os.path.exists(dest_video_path):
         os.makedirs(dest_video_path)
@@ -76,10 +77,6 @@ for i in range(1, 12):
     # keeps track of the total score for each round
     score_map = TimelineReader.get_score_map(all_rounds_data)
     kill_streak_list = TimelineReader.get_kill_streak_list(all_rounds_data)
-
-    #  search in p11 stream at match 7 there is a new stream
-    if i == 1:
-        stream_begin_row = get_match_begin_in_player_stream(i, metadata_csv, 11)
 
     stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
     stream_begin_sec = timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
@@ -119,6 +116,8 @@ for i in range(1, 12):
 
                 metadata['killstreaks'][5][dest_video_name] = {}
                 metadata['killstreaks'][5][dest_video_name]['duration'] = killstreak_duration_sec + 2 * clipping_offset_sec
+                metadata['killstreaks'][5][dest_video_name]['match'] = str(i)
+                metadata['killstreaks'][5][dest_video_name]['round'] = str(round_idx)
 
                 with open(dest_video_path + '/metadata.json', 'w') as fp:
                     json.dump(metadata, fp)
