@@ -27,8 +27,8 @@ pos_double_right_1_x2 = 355
 pos_double_right_2_x1 = 356
 pos_double_right_2_x2 = 364
 
-debug = True
-# debug = False
+# debug = True
+debug = False
 
 def resize_for_mnist(roi):
     return cv2.resize(roi, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)

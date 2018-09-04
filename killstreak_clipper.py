@@ -1,7 +1,7 @@
 import TimelineReader
 import json
-# import round_detector
-# import kill_detector
+import round_detector
+import kill_detector
 from datetime import datetime
 import csv
 import os
@@ -66,7 +66,7 @@ max_killstreak_length = 300
 metadata = {'killstreaks': {5: {}, 4: {}, 3: {}, 2: {}}}
 
 # iterate over all 11 matches from 1.json - 11.json
-for i in range(3, 4):
+for i in range(1, 12):
     # create dest. video folder if not exists
     if not os.path.exists(dest_video_path):
         os.makedirs(dest_video_path)
@@ -87,7 +87,6 @@ for i in range(3, 4):
     sorted_kill_streak_list = TimelineReader.sort_kill_streaks(kill_streak_list)
     if 5 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[5]:
-            print(score_map)
             print('Looking for 5Killstreak in match ' + str(i) + '. Begin of match at ' + sec_to_timestamp(stream_begin_sec))
             # Length information needed for searching and clipping
             killstreak_begin_utc_time = get_datetime_from_utc_string(killstreak[0]['date'])
@@ -111,26 +110,36 @@ for i in range(3, 4):
                 end_pos_in_video_sec = start_pos_in_video_sec + killstreak_duration_sec
 
                 # Detect the start time in seconds of the round where the killstreak is performed
-                # round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
-                #                                                  end_pos_in_video_sec + search_round_offset_sec, video_full_name,
-                #                                                  score_map[round_idx][0], score_map[round_idx][1])
-                #
-                # # Detect the start time in seconds of the first kill of the killstreak
-                # killstreak_begin_sec = kill_detector.get_first_kill_sec(round_begin_sec + search_kill_offset_sec,
-                #                                                         end_pos_in_video_sec + search_round_offset_sec,
-                #                                                         video_full_name,
-                #                                                         killstreak[0]['data']['actor']['ingameTeam'])
-                # # Collect meta-information which is stored in a json file in dest folder
-                #
-                # metadata['killstreaks'][5][dest_video_name] = {}
-                # metadata['killstreaks'][5][dest_video_name]['duration'] = killstreak_duration_sec + 2 * clipping_offset_sec
-                # metadata['killstreaks'][5][dest_video_name]['match'] = str(i)
-                # metadata['killstreaks'][5][dest_video_name]['round'] = str(round_idx)
-                #
-                # with open(dest_video_path + '/metadata.json', 'w') as fp:
-                #     json.dump(metadata, fp)
-                #
-                # # Cut the video and store it
-                # cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_sec,
-                #                             killstreak_begin_sec + timestamp_to_sec(str(killstreak_duration)) + clipping_offset_sec,
-                #                             dest_video_path + '/' + dest_video_name)
+                target_round_CT = 0
+                target_round_T = 0
+                # get target round numbers from score_map
+                if round_idx > 1:
+                    for teamID in score_map[round_idx - 2]:
+                        if score_map[round_idx - 2][teamID]['ingameTeam'] == 'CT':
+                            target_round_CT = score_map[round_idx - 2][teamID]['score']
+                        else:
+                            target_round_T = score_map[round_idx - 2][teamID]['score']
+
+                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
+                                                                 end_pos_in_video_sec + search_round_offset_sec, video_full_name,
+                                                                 target_round_CT, target_round_T)
+
+                # Detect the start time in seconds of the first kill of the killstreak
+                killstreak_begin_sec = kill_detector.get_first_kill_sec(round_begin_sec + search_kill_offset_sec,
+                                                                        end_pos_in_video_sec + search_round_offset_sec,
+                                                                        video_full_name,
+                                                                        killstreak[0]['data']['actor']['ingameTeam'])
+
+                # Collect meta-information which is stored in a json file in dest folder
+                metadata['killstreaks'][5][dest_video_name] = {}
+                metadata['killstreaks'][5][dest_video_name]['duration'] = killstreak_duration_sec + 2 * clipping_offset_sec
+                metadata['killstreaks'][5][dest_video_name]['match'] = str(i)
+                metadata['killstreaks'][5][dest_video_name]['round'] = str(round_idx)
+
+                with open(dest_video_path + '/metadata.json', 'w') as fp:
+                    json.dump(metadata, fp)
+
+                # Cut the video and store it
+                cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_sec,
+                                            killstreak_begin_sec + timestamp_to_sec(str(killstreak_duration)) + clipping_offset_sec,
+                                            dest_video_path + '/' + dest_video_name)
