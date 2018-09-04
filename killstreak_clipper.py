@@ -4,6 +4,7 @@ import round_detector
 import kill_detector
 from datetime import datetime
 import csv
+import os
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
 def timestamp_to_sec(timestamp):
@@ -54,13 +55,22 @@ def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_vide
     ffmpeg_extract_subclip(src_path_to_video, begin_sec, end_sec, targetname=dest_video_name)
 
 
-video_path = 'D:/gamestory18-data/train_set'
-metadata = read_metadata_csv()
+src_video_path = 'D:/gamestory18-data/train_set'
+dest_video_path = 'D:/gamestory18-data/killstreaks'
+metadata_csv = read_metadata_csv()
 first_match_utc = ''
-offest_sec = 50
+search_round_offset_sec = 50
+search_kill_offset_sec = 2
+clipping_offset_sec = 5
+max_killstreak_length = 40
+metadata = {'killstreaks': {5: {}, 4: {}, 3: {}, 2: {}}}
 
 # iterate over all 11 matches from 1.json - 11.json
-for i in range(1, 7):
+for i in range(1, 12):
+    # create dest. video folder if not exists
+    if not os.path.exists(dest_video_path):
+        os.makedirs(dest_video_path)
+
     json_file = open('timelines/' + str(i) + '.json')
     all_rounds_data = TimelineReader.preprocess(json.load(json_file))
     # keeps track of the total score for each round
@@ -69,7 +79,7 @@ for i in range(1, 7):
 
     #  search in p11 stream at match 7 there is a new stream
     if i == 1:
-        stream_begin_row = get_match_begin_in_player_stream(i, metadata, 11)
+        stream_begin_row = get_match_begin_in_player_stream(i, metadata_csv, 11)
 
     stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
     stream_begin_sec = timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
@@ -79,29 +89,41 @@ for i in range(1, 7):
     sorted_kill_streak_list = TimelineReader.sort_kill_streaks(kill_streak_list)
     if 5 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[5]:
+            # Length information needed for searching and clipping
             killstreak_begin_utc_time = get_datetime_from_utc_string(killstreak[0]['date'])
             killstreak_end_utc_time = get_datetime_from_utc_string(killstreak[4]['date'])
             difference_between_match_begin_and_killstreak_begin = killstreak_begin_utc_time - match_begin_timestamp_utc
             killstreak_duration = killstreak_end_utc_time - killstreak_begin_utc_time
-            print('killstreak duration: ' + str(killstreak_duration))
+            killstreak_duration_sec = timestamp_to_sec(str(killstreak_duration))
+            round_idx = killstreak[0]['roundIdx']
+            video_full_name = src_video_path + '/' + stream_begin_row[6]
 
-            if timestamp_to_sec(str(killstreak_duration)) < 40:
+            # Only killstreak which are shorter than max_killstreak_length are considered
+            if timestamp_to_sec(str(killstreak_duration)) < max_killstreak_length:
                 start_pos_in_video_sec = stream_begin_sec + timestamp_to_sec(str(difference_between_match_begin_and_killstreak_begin))
-                end_pos_in_video_sec = start_pos_in_video_sec + timestamp_to_sec(str(killstreak_duration))
+                dest_video_name = 'killstreak_5_round_' + str(round_idx) + '_begin_' + sec_to_timestamp(
+                    start_pos_in_video_sec - 5).replace(':', '_') + '_' + stream_begin_row[6]
+                end_pos_in_video_sec = start_pos_in_video_sec + killstreak_duration_sec
 
-                video_full_name = video_path + '/' + stream_begin_row[6]
+                # Detect the start time in seconds of the round where the killstreak is performed
+                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
+                                                                 end_pos_in_video_sec + search_round_offset_sec, video_full_name,
+                                                                 score_map[round_idx][0], score_map[round_idx][1])
 
-                round_idx = killstreak[0]['roundIdx']
-                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - offest_sec,
-                                                             end_pos_in_video_sec + offest_sec, video_full_name,
-                                                             score_map[round_idx][0], score_map[round_idx][1])
-
-                killstreak_begin_sec = kill_detector.get_first_kill_sec(round_begin_sec + 2,
-                                                                        end_pos_in_video_sec + offest_sec,
+                # Detect the start time in seconds of the first kill of the killstreak
+                killstreak_begin_sec = kill_detector.get_first_kill_sec(round_begin_sec + search_kill_offset_sec,
+                                                                        end_pos_in_video_sec + search_round_offset_sec,
                                                                         video_full_name,
                                                                         killstreak[0]['data']['actor']['ingameTeam'])
+                # Collect meta-information which is stored in a json file in dest folder
 
-                cut_video_within_boundaries(video_full_name, killstreak_begin_sec - 5,
-                                            killstreak_begin_sec + timestamp_to_sec(str(killstreak_duration)) + 5,
-                                            '5_round_' + str(round_idx) + '.mp4')
+                metadata['killstreaks'][5][dest_video_name] = {}
+                metadata['killstreaks'][5][dest_video_name]['duration'] = killstreak_duration_sec + 2 * clipping_offset_sec
 
+                with open(dest_video_path + '/metadata.json', 'w') as fp:
+                    json.dump(metadata, fp)
+
+                # Cut the video and store it
+                cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_sec,
+                                            killstreak_begin_sec + timestamp_to_sec(str(killstreak_duration)) + clipping_offset_sec,
+                                            dest_video_path + '/' + dest_video_name)
