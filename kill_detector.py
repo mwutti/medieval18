@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import logging
+import util.detection_utils as util
 
 
 def binarize(roi):
@@ -14,7 +16,7 @@ norm_threshold = 3000
 
 def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, team='CT'):
     if debug:
-        print("Start detecting first kill for " + team + " from: " + str(start_pos_in_video_sec) + " until:" + str(
+        logging.info("Start detecting first kill for " + team + " from: " + str(start_pos_in_video_sec) + " until:" + str(
             end_pos_in_video_sec))
 
     cap = cv2.VideoCapture(video_path)
@@ -65,7 +67,7 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
             if detection_map[i] >= detection_threshold:
                 if debug:
                     cv2.destroyAllWindows()
-                print("Detected first kill at: " + str(current_sec))
+                logging.info("Detected first kill at: " + util.sec_to_timestamp(current_sec))
                 return current_sec
             i += 1
 

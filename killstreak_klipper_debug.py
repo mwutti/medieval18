@@ -1,12 +1,11 @@
 import TimelineReader
 import json
 import logging
-import round_detector
-import kill_detector
+
 
 import os
 import util.detection_utils as util
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+
 
 # debug = True
 debug = False
@@ -21,8 +20,7 @@ clipping_offset_sec = 5
 max_killstreak_length = 40
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
 
-def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_video_name):
-    ffmpeg_extract_subclip(src_path_to_video, begin_sec, end_sec, targetname=dest_video_name)
+
 
 
 def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx):
@@ -106,24 +104,7 @@ def extract_5_killstreaks(killstreak):
                 else:
                     target_round_T = score_map[round_idx - 2][teamID]['score']
 
-        round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
-                                                         end_pos_in_video_sec + search_round_offset_sec,
-                                                         video_full_name,
-                                                         target_round_CT, target_round_T)
 
-        # Detect the start time in seconds of the first kill of the killstreak
-        killstreak_begin_sec = kill_detector.get_first_kill_sec(round_begin_sec + search_kill_offset_sec,
-                                                                end_pos_in_video_sec + search_round_offset_sec,
-                                                                video_full_name,
-                                                                killstreak[0]['data']['actor']['ingameTeam'])
-        # Log Killstreak to file
-        add_killstreak_to_list(5, dest_video_name, killstreak_duration_sec, round_idx)
-
-        # Cut the video and store it
-        cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_sec,
-                                    killstreak_begin_sec + util.timestamp_to_sec(
-                                        str(killstreak_duration)) + clipping_offset_sec,
-                                    dest_video_path + '/5/' + dest_video_name)
     else:
         logging.info("5-Killstreak duration in match " + str(i) + ": " + str(
             killstreak_duration_sec) + 'sec is above threshold of ' + str(max_killstreak_length))
@@ -160,10 +141,9 @@ for i in range(1, 12):
         # detect 4-Killstreaks
         if os.path.exists(dest_video_path + '/4/metadata.json'):
             logging.info("4-Killstreaks for match " + str(
-                i) + " already detected and extracted. Delete " + dest_video_path + '/4/metadata.json to redetect killstreaks')
+                i) + " already detected and extracted. Delete " + dest_video_path + '/5/metadata.json to redetect killstreaks')
         elif 4 in sorted_kill_streak_list:
             for killstreak in sorted_kill_streak_list[4]:
                 extract_4_killstreaks(killstreak)
 
-log_killstreak_to_file(5)
 log_killstreak_to_file(4)

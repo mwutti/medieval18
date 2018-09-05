@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import logging
 import util.detection_utils as util
 from tensorflow import keras
 
@@ -30,6 +31,7 @@ pos_double_right_2_x2 = 364
 
 # debug = True
 debug = False
+detection_threshold = 100
 
 def resize_for_mnist(roi):
     return cv2.resize(roi, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
@@ -61,6 +63,7 @@ def get_single_number_left(image):
         cv2.imshow('object detection_right', roi_left)
     return str(np.argmax(model.predict(roi_left_prepared)))
 
+
 def get_single_number_right(image):
     roi_right = image[pos_y1:pos_y2, pos_single_right_x1:pos_single_right_x2]
     roi_right_prepared = prepare_for_mnist(roi_right)
@@ -88,8 +91,6 @@ def get_double_number_left(image):
     if debug:
         cv2.imshow('object detection_left_1', roi_left_1)
         cv2.imshow('object detection_left_2', roi_left_2)
-        # print(number_string_1)
-        # print(number_string_2)
     return number_string_1 + number_string_2
 
 
@@ -111,14 +112,12 @@ def get_double_number_right(image):
     if debug:
         cv2.imshow('object detection_left_1', roi_right_1)
         cv2.imshow('object detection_left_2', roi_right_2)
-        # print(number_string_1)
-        # print(number_string_2)
     return number_string_1 + number_string_2
 
 
 def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_name, target_round_left,
                     target_round_right):
-    print('Looking for ' + str(target_round_left) + ':' + str(target_round_right) + ' in video ' + video_full_name + ' from ' + util.sec_to_timestamp(start_pos_in_video_sec) + ' to ' + sec_to_timestamp(end_pos_in_video_sec))
+    logging.info('Looking for ' + str(target_round_left) + ':' + str(target_round_right) + ' in video ' + video_full_name + ' from ' + util.sec_to_timestamp(start_pos_in_video_sec) + ' to ' + util.sec_to_timestamp(end_pos_in_video_sec))
     cap = cv2.VideoCapture(video_full_name)
     fps = cap.get(cv2.CAP_PROP_FPS)
     nr_of_frames = 0
@@ -141,8 +140,6 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
 
         current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
         current_timestamp = util.sec_to_timestamp(current_sec)
-        if nr_of_frames % 1000 == 0:
-            print("at pos " + current_timestamp)
 
         # convert Image to grayscale
         image_gray = cv2.cvtColor(image_np, cv2.COLOR_BGR2GRAY)
@@ -160,8 +157,9 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
 
             if out_left == str(target_round_left):
                 nr_left_detected += 1
-                if nr_left_detected >= 100:
-                    print("left round detected")
+                if nr_left_detected >= detection_threshold:
+                    if debug:
+                        print("left round detected")
                     left_detected = True
 
         if not right_detected:
@@ -177,12 +175,13 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
 
             if out_right == str(target_round_right):
                 nr_right_detected += 1
-                if nr_right_detected >= 100:
+                if nr_right_detected >= detection_threshold:
+                    if debug:
+                        print("right round detected")
                     right_detected = True
-                    print("right round detected")
 
         if left_detected and right_detected:
-            print("detected round start at" + current_timestamp)
+            logging.info("Detected round start at " + current_timestamp)
             return current_sec
 
         if debug:
