@@ -3,6 +3,20 @@ import os
 import numpy as np
 import logging
 
+video_path = 'D:/gamestory18-data/train_set/2018-03-02_P11.mp4'
+dest_path = 'images'
+
+image_width = 28
+nr_of_samples = image_width * image_width
+pos_y1 = 10
+pos_y2 = 26
+
+pos_single_left_x1 = 274
+pos_single_left_x2 = 290
+
+search_duration = 20
+nr_of_frames_to_extract = 500
+begin_timestamps = ['1:05:55', '1:06:41', '1:08:52', '1:09:37', '1:11:25', '1:12:26', '1:16:50', '1:18:24', '1:20:57', '1:22:56']
 
 def timestamp_to_sec(timestamp):
     split_timestamp = timestamp.split(':')
@@ -19,39 +33,6 @@ def sec_to_timestamp(sec):
         minutes = minutes % 60
     return str(hours) + ':' + str(minutes) + ':' + str(seconds)
 
-video_path = 'D:/gamestory18-data/train_set/2018-03-02_P11.mp4'
-dest_path = 'images'
-
-
-pos_y1 = 10
-pos_y2 = 26
-
-pos_single_left_x1 = 274
-pos_single_left_x2 = 290
-
-pos_single_right_x1 = 347
-pos_single_right_x2 = 363
-
-pos_double_left_1_x1 = 275
-pos_double_left_1_x2 = 283
-
-pos_double_left_2_x1 = 281
-pos_double_left_2_x2 = 289
-
-pos_double_right_1_x1 = 347
-pos_double_right_1_x2 = 355
-
-pos_double_right_2_x1 = 356
-pos_double_right_2_x2 = 364
-
-search_duration = 20
-nr_of_frames_to_extract = 500
-begin_timestamps = ['1:05:55', '1:06:41', '1:08:52', '1:09:37', '1:11:25', '1:12:26', '1:16:50', '1:18:24', '1:20:57', '1:22:56']
-
-cap = cv2.VideoCapture(video_path)
-fps = cap.get(cv2.CAP_PROP_FPS)
-
-
 def preprocess_and_extract_roi(image):
     """Preprocesses and extracts the left roi
 
@@ -65,31 +46,80 @@ def preprocess_and_extract_roi(image):
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     roi = image_gray[pos_y1:pos_y2, pos_single_left_x1:pos_single_left_x2]
-    roi = cv2.resize(roi, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
+    roi = cv2.resize(roi, dsize=(image_width, image_width), interpolation=cv2.INTER_CUBIC)
     roi = cv2.threshold(roi, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
     return roi
 
+def extract_images():
+    """
+        extracts the images for svm training set
+        NOTE: images should be inspected manually for detecting outliers
+    """
+    logging.info("Starting extraction of training images for svm (number detection)")
+    cap = cv2.VideoCapture(video_path)
+    fps = cap.get(cv2.CAP_PROP_FPS)
 
-# extract images from video for 0-9
-for i in range(3, 10):
-    if not os.path.exists(dest_path + '/' + str(i)):
-        os.makedirs(dest_path + '/' + str(i))
+    # extract images from video for 0-9
+    for i in range(0, 10):
+        if not os.path.exists(dest_path + '/' + str(i)):
+            os.makedirs(dest_path + '/' + str(i))
 
-    begin_sec = timestamp_to_sec(begin_timestamps[i])
-    frame_pos_start = int(begin_sec * fps)
-    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
+        begin_sec = timestamp_to_sec(begin_timestamps[i])
+        frame_pos_start = int(begin_sec * fps)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
 
-    for j in range(0, nr_of_frames_to_extract):
-        ret, image_np = cap.read()
+        for j in range(0, nr_of_frames_to_extract):
+            ret, image_np = cap.read()
+            roi_left = preprocess_and_extract_roi(image_np)
+            cv2.imwrite('images/' + str(i) + '/' + str(j) + '.png', roi_left)
 
-        # cv2.imshow('object detection', image_np)
-        roi_left = preprocess_and_extract_roi(image_np)
 
-        # cv2.imshow('object detection_left', roi_left)
+def load_dataset():
+    """
+        loads the training dataset
+     Returns:
+        training dataset
+    """
+    if not os.path.exists(dest_path):
+        extract_images()
+    else:
 
-        cv2.imwrite('images/' + str(i) + '/' + str(j) + '.png', roi_left)
-        # if cv2.waitKey(25) & 0xFF == ord('q'):
-        #     cv2.destroyAllWindows()
-        #     break
+        all_images_data = []
+        all_images_target = []
+
+        for i in range(0, 10):
+            current_dest_path = os.getcwd() + '/' + dest_path + '/' + str(i) + '/'
+            files = [f for f in os.listdir(current_dest_path) if os.path.isfile(os.path.join(current_dest_path, f))]
+
+            nr_of_files = len(files)
+
+            array_for_data = np.empty((nr_of_files, nr_of_samples))
+            array_for_target = np.empty(nr_of_files)
+
+            for j in range(0, nr_of_files):
+                # load every image, reshape it and store in single array
+                image = cv2.imread(os.path.join(current_dest_path + files[i]), 0)
+                image = image.reshape(nr_of_samples)
+
+                array_for_data[j] = image
+                array_for_target[j] = i # store corresponding label
+
+            all_images_data.append(array_for_data)
+            all_images_target.append(array_for_target)
+
+        # At this point all data is in all_images_data and all_images_target
+        # merge data together
+        target_array_size = 0
+        for image_targets in all_images_target:
+            target_array_size += image_targets.size
+
+        data = np.concatenate([image for image in all_images_data])
+        target = np.concatenate([target for target in all_images_target])
+
+        dataset = {'target_names': np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), 'data': data, 'target': target}
+        return dataset
+
+dataset = load_dataset()
+
 
