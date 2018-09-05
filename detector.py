@@ -1,10 +1,7 @@
-import os
-
 import cv2
 import label_map_util
 import numpy as np
 import tensorflow as tf
-import visualization_utils
 
 TRAINING_DIR = 'training'
 DATA_DIR = 'data'

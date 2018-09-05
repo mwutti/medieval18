@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import util.detection_utils as util
 from tensorflow import keras
 
 video_path = 'D:/gamestory18-data/train_set'
@@ -115,19 +116,9 @@ def get_double_number_right(image):
     return number_string_1 + number_string_2
 
 
-def sec_to_timestamp(sec):
-    seconds = sec % 60
-    minutes = sec // 60
-    hours = 0
-    if minutes > 60:
-        hours = minutes // 60
-        minutes = minutes % 60
-    return str(hours) + ':' + str(minutes) + ':' + str(seconds)
-
-
 def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_name, target_round_left,
                     target_round_right):
-    print('Looking for ' + str(target_round_left) + ':' + str(target_round_right) + ' in video ' + video_full_name + ' from ' + sec_to_timestamp(start_pos_in_video_sec) + ' to ' + sec_to_timestamp(end_pos_in_video_sec))
+    print('Looking for ' + str(target_round_left) + ':' + str(target_round_right) + ' in video ' + video_full_name + ' from ' + util.sec_to_timestamp(start_pos_in_video_sec) + ' to ' + sec_to_timestamp(end_pos_in_video_sec))
     cap = cv2.VideoCapture(video_full_name)
     fps = cap.get(cv2.CAP_PROP_FPS)
     nr_of_frames = 0
@@ -149,7 +140,7 @@ def get_round_begin(start_pos_in_video_sec, end_pos_in_video_sec, video_full_nam
         nr_of_frames += 1
 
         current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
-        current_timestamp = sec_to_timestamp(current_sec)
+        current_timestamp = util.sec_to_timestamp(current_sec)
         if nr_of_frames % 1000 == 0:
             print("at pos " + current_timestamp)
 

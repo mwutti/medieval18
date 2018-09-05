@@ -1,5 +1,3 @@
-import os
-
 import cv2
 import label_map_util
 import numpy as np

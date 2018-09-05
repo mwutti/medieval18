@@ -2,21 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/util/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/detection_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TimelineReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/TimelineReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_10.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_10.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_11.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_11.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_2.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_3.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_4.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_5.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_5.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_6.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_6.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_7.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_7.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_8.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_8.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_9.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv-metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/csv-metadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/detector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/detector_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/detector_copy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_tfrecord.py" beforeDir="false" afterPath="$PROJECT_DIR$/model-preparation/generate_tfrecord.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kill_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/kill_detector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killstreak_clipper.py" beforeDir="false" afterPath="$PROJECT_DIR$/killstreak_clipper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/round_detector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/label_map_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/model-preparation/label_map_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mnist-train.py" beforeDir="false" afterPath="$PROJECT_DIR$/model-preparation/mnist-train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/number_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/number_detector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/model-preparation/visualization_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xml_to_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/model-preparation/xml_to_csv.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,8 +43,8 @@
           <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="193">
-                  <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+                <state relative-caret-position="398">
+                  <caret line="83" column="79" selection-start-line="83" selection-start-column="79" selection-end-line="83" selection-end-column="79" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -56,7 +56,7 @@
             <entry file="file://$PROJECT_DIR$/data/metadata.csv">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="434">
-                  <caret line="50" column="92" lean-forward="true" selection-start-line="50" selection-start-column="92" selection-end-line="50" selection-end-column="92" />
+                  <caret line="50" column="92" selection-start-line="50" selection-start-column="92" selection-end-line="50" selection-end-column="92" />
                 </state>
               </provider>
             </entry>
@@ -66,7 +66,7 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="visualization_utils.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/visualization_utils.py">
+            <entry file="file://$PROJECT_DIR$/model-preparation/visualization_utils.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="408">
                   <caret line="27" selection-start-line="27" selection-end-line="27" selection-end-column="25" />
@@ -77,52 +77,45 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="generate_tfrecord.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/generate_tfrecord.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1241">
-                  <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="number_detector.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/number_detector.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="30" selection-start-line="30" selection-end-line="30" />
-                  <folding>
-                    <element signature="e#0#10#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="340">
+                  <caret line="21" column="15" selection-start-line="21" selection-end-line="21" selection-end-column="15" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="kill_detector.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/kill_detector.py">
+          <file leaf-file-name="detection_utils.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/util/detection_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-                  <folding>
-                    <element signature="e#0#10#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="153">
+                  <caret line="9" column="20" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="killstreaks_1.json" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/data/killstreaks/killstreaks_1.json">
+          <file leaf-file-name="label_map_util.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/model-preparation/label_map_util.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file leaf-file-name="csv-metadata.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/csv-metadata.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="816">
-                  <caret column="48676" selection-start-column="48676" selection-end-column="48676" />
+                <state relative-caret-position="1597">
+                  <caret line="105" column="30" lean-forward="true" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+                  <folding>
+                    <element signature="e#0#10#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file leaf-file-name="mnist-train.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/mnist-train.py">
+            <entry file="file://$PROJECT_DIR$/model-preparation/mnist-train.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
+                <state relative-caret-position="544">
                   <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
@@ -131,11 +124,29 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="round_detector.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="detector.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/detector.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="detector_copy.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/detector_copy.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="33" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="round_detector.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/round_detector.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+                <state relative-caret-position="153">
+                  <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -146,8 +157,8 @@
           <file leaf-file-name="TimelineReader.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/TimelineReader.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="711">
-                  <caret line="111" selection-start-line="111" selection-end-line="111" />
+                <state relative-caret-position="510">
+                  <caret line="30" selection-start-line="30" selection-end-line="30" />
                 </state>
               </provider>
             </entry>
@@ -189,9 +200,9 @@
       <find>asd</find>
       <find>replace</find>
       <find>killstreak_begin</find>
-      <find>roundIdx&quot;: 27</find>
+      <find />
       <find>get_double_number_right</find>
-      <find>roundIdx&quot;: 2</find>
+      <find />
       <find>kill</find>
       <find>looser</find>
       <find>print</find>
@@ -218,16 +229,17 @@
         <option value="$PROJECT_DIR$/detector_copy.py" />
         <option value="$PROJECT_DIR$/visualization_utils.py" />
         <option value="$PROJECT_DIR$/detector.py" />
-        <option value="$PROJECT_DIR$/csv-metadata.py" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/mnist-train.py" />
         <option value="$PROJECT_DIR$/number_detector.py" />
         <option value="$PROJECT_DIR$/data/killstreaks/killstreaks_1.json" />
-        <option value="$PROJECT_DIR$/kill_detector.py" />
         <option value="D:/gamestory18-data/killstreaks/metadata.json" />
         <option value="$PROJECT_DIR$/timelines/3.json" />
-        <option value="$PROJECT_DIR$/TimelineReader.py" />
         <option value="$PROJECT_DIR$/round_detector.py" />
+        <option value="$PROJECT_DIR$/kill_detector.py" />
+        <option value="$PROJECT_DIR$/csv-metadata.py" />
+        <option value="$PROJECT_DIR$/TimelineReader.py" />
+        <option value="$PROJECT_DIR$/util/detection_utils.py" />
         <option value="$PROJECT_DIR$/killstreak_clipper.py" />
       </list>
     </option>
@@ -262,12 +274,7 @@
             <path>
               <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
               <item name="medieval-object-detection" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medieval-object-detection" type="462c0819:PsiDirectoryNode" />
-              <item name="timelines" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -283,15 +290,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\model-preparation" />
+      <recent name="C:\Users\Michael\Development\medieval-object-detection\data" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\training\mnist" />
       <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\data\img" />
       <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\training\openimage" />
       <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\training\coco" />
       <recent name="C:\Users\Michael\Development\tensorflow-models\research\object_detection\medieval-object-detection\data" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Michael\Development\medieval-object-detection\data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -442,15 +450,14 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3282504" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30738363" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21264368" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30738363" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21428572" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.34269664" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.30417335" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.30417335" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -458,6 +465,7 @@
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.34269664" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,12 +483,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/csv-metadata.py</url>
-          <line>144</line>
+          <line>108</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/killstreak_clipper.py</url>
-          <line>117</line>
+          <line>105</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
@@ -537,10 +545,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/trophies_labels_train.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xml_to_csv.py">
+    <entry file="file://$PROJECT_DIR$/model-preparation/xml_to_csv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
@@ -550,7 +555,7 @@
     <entry file="file://$PROJECT_DIR$/training/pipeline.config">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/generate_tfrecord.py">
+    <entry file="file://$PROJECT_DIR$/model-preparation/generate_tfrecord.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
           <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
@@ -574,7 +579,7 @@
     <entry file="file://$PROJECT_DIR$/data/trophies_labels_train.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/xml_to_csv.py">
+    <entry file="file://$PROJECT_DIR$/model-preparation/xml_to_csv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
@@ -602,7 +607,7 @@
     <entry file="file://$PROJECT_DIR$/data/trophies_labels_train.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/xml_to_csv.py">
+    <entry file="file://$PROJECT_DIR$/model-preparation/xml_to_csv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
@@ -622,9 +627,6 @@
           <caret line="104" column="45" selection-start-line="104" selection-start-column="35" selection-end-line="104" selection-end-column="45" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/label_map_util.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/object-detection.pbtxt">
       <provider selected="true" editor-type-id="text-editor">
@@ -729,40 +731,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/detector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/detector_copy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate_tfrecord.py">
+    <entry file="file://$PROJECT_DIR$/model-preparation/generate_tfrecord.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
           <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" selection-start-line="27" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <element signature="e#907#925#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,26 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret column="28766" selection-start-column="28763" selection-end-column="28766" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/csv-metadata.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mnist-train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,37 +762,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/number_detector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kill_detector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/gamestory18-data/killstreaks/metadata.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/metadata.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="50" column="92" lean-forward="true" selection-start-line="50" selection-start-column="92" selection-end-line="50" selection-end-column="92" />
         </state>
       </provider>
     </entry>
@@ -851,27 +776,108 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TimelineReader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/round_detector.py">
+    <entry file="file://$PROJECT_DIR$/kill_detector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model-preparation/label_map_util.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/detector_copy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model-preparation/mnist-train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model-preparation/visualization_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="27" selection-start-line="27" selection-end-line="27" selection-end-column="25" />
+          <folding>
+            <element signature="e#907#925#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/round_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/number_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" column="15" selection-start-line="21" selection-end-line="21" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/csv-metadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1597">
+          <caret line="105" column="30" lean-forward="true" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/metadata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="50" column="92" selection-start-line="50" selection-start-column="92" selection-end-line="50" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TimelineReader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/detection_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+        <state relative-caret-position="398">
+          <caret line="83" column="79" selection-start-line="83" selection-start-column="79" selection-end-line="83" selection-end-column="79" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

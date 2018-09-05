@@ -1,11 +1,5 @@
-import cv2
-import label_map_util
-import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-import visualization_utils
-import pathlib
-import os
 
 mnist = tf.keras.datasets.mnist
 

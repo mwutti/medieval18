@@ -9,7 +9,8 @@ def binarize(roi):
 
 # debug = True
 debug = False
-
+detection_threshold = 60
+norm_threshold = 3000
 
 def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, team='CT'):
     if debug:
@@ -27,9 +28,7 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
 
     skull = cv2.imread('images/skull/skull.png', 0)
-    norm_threshold = 3000
 
-    detection_threshold = 60
     detection_map = [0, 0, 0, 0, 0]  # norm must be 60x under norm_threshold
 
     print(skull)
