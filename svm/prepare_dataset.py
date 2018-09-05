@@ -2,6 +2,8 @@ import cv2
 import os
 import numpy as np
 import logging
+from sklearn.model_selection import train_test_split
+from sklearn import datasets, svm, metrics
 
 video_path = 'D:/gamestory18-data/train_set/2018-03-02_P11.mp4'
 dest_path = 'images'
@@ -122,4 +124,21 @@ def load_dataset():
 
 dataset = load_dataset()
 
+X_train, X_test, y_train, y_test = train_test_split(dataset['data'], dataset['target'])
+
+print('Training data and target sizes: \n{}, {}'.format(X_train.shape,y_train.shape))
+print('Test data and target sizes: \n{}, {}'.format(X_test.shape,y_test.shape))
+
+# Create a classifier: a support vector classifier
+classifier = svm.SVC(gamma=0.001)
+#fit to the trainin data
+classifier.fit(X_train, y_train)
+
+# now to Now predict the value of the digit on the test data
+y_pred = classifier.predict(X_test)
+
+print("Classification report for classifier %s:\n%s\n"
+      % (classifier, metrics.classification_report(y_test, y_pred)))
+
+print("Confusion matrix:\n%s" % metrics.confusion_matrix(y_test, y_pred))
 
