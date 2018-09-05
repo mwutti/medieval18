@@ -29,8 +29,8 @@ pos_double_right_1_x2 = 355
 pos_double_right_2_x1 = 356
 pos_double_right_2_x2 = 364
 
-# debug = True
-debug = False
+debug = True
+# debug = False
 detection_threshold = 100
 
 def resize_for_mnist(roi):
@@ -60,7 +60,7 @@ def get_single_number_left(image):
     roi_left = image[pos_y1:pos_y2, pos_single_left_x1:pos_single_left_x2]
     roi_left_prepared = prepare_for_mnist(roi_left)
     if debug:
-        cv2.imshow('object detection_right', roi_left)
+        cv2.imshow('object detection_left', roi_left)
     return str(np.argmax(model.predict(roi_left_prepared)))
 
 
