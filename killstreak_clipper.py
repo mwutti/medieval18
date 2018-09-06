@@ -1,11 +1,11 @@
 import TimelineReader
 import json
 import logging
-import round_detector
 import kill_detector
-
+import round_detector
 import os
 import util.detection_utils as util
+
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
 # debug = True
@@ -19,7 +19,10 @@ search_round_offset_sec = 50
 search_kill_offset_sec = 2
 clipping_offset_sec = 5
 max_killstreak_length = 40
+round_detector = round_detector.RoundDetector()
+
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
+
 
 def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_video_name):
     ffmpeg_extract_subclip(src_path_to_video, begin_sec, end_sec, targetname=dest_video_name)
@@ -179,6 +182,7 @@ def extract_5_killstreaks(killstreak):
         logging.info("5-Killstreak duration in match " + str(i) + ": " + str(
             killstreak_duration_sec) + 'sec is above threshold of ' + str(max_killstreak_length))
 
+
 # create dest. video folders if not exists
 for j in range(3, 6):
     if not os.path.exists(dest_video_path + '/' + str(j)):
@@ -191,19 +195,22 @@ for i in range(1, 12):
         json_file = open('timelines/' + str(i) + '.json')
         all_rounds_data = TimelineReader.preprocess(json.load(json_file))
 
-        score_map = TimelineReader.get_score_map_for_match(all_rounds_data)   # keeps track of the total score for each round
+        score_map = TimelineReader.get_score_map_for_match(
+            all_rounds_data)  # keeps track of the total score for each round
 
         kill_streak_list = TimelineReader.get_kill_streak_list(all_rounds_data)
-        sorted_kill_streak_list = TimelineReader.sort_kill_streaks(kill_streak_list)  # Sorted by highest KillStreakLength desc
+        sorted_kill_streak_list = TimelineReader.sort_kill_streaks(
+            kill_streak_list)  # Sorted by highest KillStreakLength desc
 
         stream_begin_row = util.get_match_begin_in_player_stream(i, metadata_csv, 11)
         stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
         stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
         match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
 
-        #detect 5-Killstreaks
+        # detect 5-Killstreaks
         if os.path.exists(dest_video_path + '/5/metadata.json'):
-            logging.info("5-Killstreaks for match " + str(i) + " already detected and extracted. Delete " + dest_video_path + '/5/metadata.json to redetect killstreaks')
+            logging.info("5-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + dest_video_path + '/5/metadata.json to redetect killstreaks')
         elif 5 in sorted_kill_streak_list:
             for killstreak in sorted_kill_streak_list[5]:
                 extract_5_killstreaks(killstreak)
