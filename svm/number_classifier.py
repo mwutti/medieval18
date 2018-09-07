@@ -11,14 +11,15 @@ dest_path = "D:/gamestory18-data/svm_training_images"
 
 image_width = 28
 nr_of_samples = image_width * image_width
+
 pos_y1 = 10
 pos_y2 = 26
 
-pos_single_left_x1 = 274
-pos_single_left_x2 = 290
+pos_left_x1 = 274
+pos_left_x2 = 290
 
-pos_single_right_x1 = 349
-pos_single_right_x2 = 365
+pos_right_x1 = 349
+pos_right_x2 = 365
 
 search_duration = 20
 nr_of_frames_to_extract = 500
@@ -87,9 +88,9 @@ def preprocess_and_extract_roi(image, left=True):
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     if left:
-        roi = image_gray[pos_y1:pos_y2, pos_single_left_x1:pos_single_left_x2]
+        roi = image_gray[pos_y1:pos_y2, pos_left_x1:pos_left_x2]
     else:
-        roi = image_gray[pos_y1:pos_y2, pos_single_right_x1:pos_single_right_x2]
+        roi = image_gray[pos_y1:pos_y2, pos_right_x1:pos_right_x2]
 
     roi = cv2.resize(roi, dsize=(image_width, image_width), interpolation=cv2.INTER_CUBIC)
     roi = cv2.threshold(roi, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
@@ -176,7 +177,7 @@ class NumberClassifier:
     def train_classifier(self):
         self.load_dataset()
 
-        logger.info("Start training classifier")
+        logger.info("Start training number classifier")
         X_train, X_test, y_train, y_test = train_test_split(self.dataset['data'], self.dataset['target'], test_size=0.4, random_state=0)
         self.classifier.fit(X_train, y_train)
         y_pred = self.classifier.predict(X_test)
@@ -189,7 +190,7 @@ class NumberClassifier:
             print("Confusion matrix:\n%s" % metrics.confusion_matrix(y_test, y_pred))
 
     def predict(self, image):
-        return self.classifier.predict(image)[0]
+        return int(self.classifier.predict(image)[0])
 
 
 
