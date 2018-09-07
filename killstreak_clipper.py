@@ -207,13 +207,13 @@ for i in range(1, 12):
         stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
         match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
 
-        # detect 5-Killstreaks
-        if os.path.exists(dest_video_path + '/5/metadata.json'):
-            logging.info("5-Killstreaks for match " + str(
-                i) + " already detected and extracted. Delete " + dest_video_path + '/5/metadata.json to redetect killstreaks')
-        elif 5 in sorted_kill_streak_list:
-            for killstreak in sorted_kill_streak_list[5]:
-                extract_5_killstreaks(killstreak)
+        # # detect 5-Killstreaks
+        # if os.path.exists(dest_video_path + '/5/metadata.json'):
+        #     logging.info("5-Killstreaks for match " + str(
+        #         i) + " already detected and extracted. Delete " + dest_video_path + '/5/metadata.json to redetect killstreaks')
+        # elif 5 in sorted_kill_streak_list:
+        #     for killstreak in sorted_kill_streak_list[5]:
+        #         extract_5_killstreaks(killstreak)
 
         # detect 4-Killstreaks
         if os.path.exists(dest_video_path + '/4/metadata.json'):

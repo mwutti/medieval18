@@ -21,8 +21,8 @@ pos_single_right_x2 = 365
 pos_double_left_1_x1 = 275
 pos_double_left_1_x2 = 283
 
-pos_double_left_2_x1 = 281
-pos_double_left_2_x2 = 289
+pos_double_left_2_x1 = 282
+pos_double_left_2_x2 = 291
 
 pos_double_right_1_x1 = 347
 pos_double_right_1_x2 = 355
@@ -30,8 +30,8 @@ pos_double_right_1_x2 = 355
 pos_double_right_2_x1 = 356
 pos_double_right_2_x2 = 364
 
-debug = True
-# debug = False
+# debug = True
+debug = False
 detection_threshold = 100
 
 
@@ -39,9 +39,8 @@ def prepare_for_classifier(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # convert Image to grayscale
     image = cv2.resize(image, dsize=(image_width, image_width), interpolation=cv2.INTER_CUBIC)  # Resize and interpolate
     image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]  # binarize it
+    image = np.divide(image, 255)
     image = image.reshape(1, nr_of_samples)  #  reshape
-    image = image.astype(np.float64)
-    print(image.dtype)
     return image
 
 
@@ -69,8 +68,8 @@ class RoundDetector:
 
         nr_left_detected = 0
         nr_right_detected = 0
-        left_detected = True
-        right_detected = False
+        left_detected = False
+        right_detected = True
 
         while not (left_detected and right_detected) and current_frame <= frame_pos_end:
             ret, image_np = cap.read()
@@ -172,7 +171,15 @@ class RoundDetector:
         number_string_1 = str(out_left_1)
         number_string_2 = str(np.argmax(out_left_2))
 
+        daFuck1 = image[pos_y1:pos_y2, pos_double_left_1_x1:pos_double_left_1_x2]
+        daFuck1 = cv2.cvtColor(daFuck1, cv2.COLOR_BGR2GRAY)  # convert Image to grayscale
+        # daFuck1 = cv2.resize(daFuck1, dsize=(image_width, image_width),
+        #                      interpolation=cv2.INTER_CUBIC)  # Resize and interpolate
+        daFuck1 = cv2.threshold(daFuck1, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+
+        # print("Number string 1: " + number_string_1)
+        # print("Number string 2: " + number_string_2)
         if debug:
-            cv2.imshow('object detection_left_1', roi_left_1)
+            cv2.imshow('daFuck1_1', daFuck1)
             cv2.imshow('object detection_left_2', roi_left_2)
         return number_string_1 + number_string_2
