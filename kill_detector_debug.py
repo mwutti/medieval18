@@ -12,7 +12,7 @@ def binarize(roi):
 
 debug = True
 # debug = False
-detection_threshold = 60
+detection_threshold = 20
 norm_threshold = 20
 skull = cv2.imread('images/skull/skull.png', 0)
 
@@ -24,9 +24,9 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 max_duration = 20000
 
 
-def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, ntk_kill=1):
+def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, nth_kill=1):
     if debug:
-        logger.info("Start detecting " + str(ntk_kill) + " kill from: " + str(start_pos_in_video_sec) + " until:" + str(
+        logger.info("Start detecting " + str(nth_kill) + " kill from: " + util.sec_to_timestamp(start_pos_in_video_sec) + " until:" + util.sec_to_timestamp(
             end_pos_in_video_sec))
 
     cap = cv2.VideoCapture(video_path)
@@ -39,7 +39,7 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
     current_frame = frame_pos_start
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
 
-    detection_map = np.zeros(10)  # norm must be 60x under norm_threshold
+    detection_map = np.zeros(10)
 
     while current_frame <= frame_pos_end:
         ret, image_np = cap.read()
@@ -53,7 +53,7 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
         if debug:
             cv2.imshow('kill', image_np)
 
-
+        #TODO refactore positions into properties file
         roi = [image_gray[239:255, 611:624], image_gray[262:278, 611:624], image_gray[285:301, 611:624],
                image_gray[307:323, 611:624], image_gray[330:346, 611:624],
                image_gray[239:255, 16:29], image_gray[262:278, 16:29], image_gray[285:301, 16:29],
@@ -68,17 +68,18 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
         # calculate L1 norm with skul.png
         np.sum(abs(np.divide(skull, 255) - roi_normalized))
         l1_norms = [np.sum(abs(np.divide(skull, 255) - roi_normalized)) for roi_normalized in roi_normalized]
-        print(l1_norms)
+
         i = 0
         for norm in l1_norms:
             if norm <= norm_threshold:
                 detection_map[i] += 1
-            if detection_map[i] >= detection_threshold:
-                if debug:
-                    cv2.destroyAllWindows()
-                logger.info("Detected first kill at: " + util.sec_to_timestamp(current_sec))
-                return current_sec
             i += 1
+
+        if (detection_map >= norm_threshold).sum() >= nth_kill:
+            if debug:
+                cv2.destroyAllWindows()
+            logger.info("Detected " + str(nth_kill) + " kill at: " + util.sec_to_timestamp(current_sec))
+            return current_sec
 
         if debug:
             i = 0
@@ -91,5 +92,5 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
                 break
 
 
-get_nth_kill_sec(4010, 4500, video_path, 1)
+get_nth_kill_sec(4010, 4500, video_path, 2)
 
