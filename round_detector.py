@@ -8,6 +8,7 @@ import util.detection_utils as util
 debug = False
 
 video_path = 'D:/gamestory18-data/train_set'
+wins_the_round = cv2.imread('images/win_round/wins_the_round.png', 0)
 
 image_width = 28
 nr_of_samples = image_width * image_width
@@ -21,7 +22,8 @@ pos_left_x2 = 290
 pos_right_x1 = 349
 pos_right_x2 = 365
 
-detection_threshold = 100
+detection_threshold_for_number = 100
+detection_threshold_for_wins_the_round = 200
 
 
 def prepare_for_classifier(image):
@@ -31,6 +33,28 @@ def prepare_for_classifier(image):
     image = np.divide(image, 255)
     image = image.reshape(1, nr_of_samples)  # reshape
     return image
+
+
+def check_correct_round_start(image):
+    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    roi_left = image_gray[30:45, 170:260]
+    roi_right = image_gray[30:45, 375:465]
+
+    roi_right = cv2.threshold(roi_right, 0, 255,
+                              cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+
+    roi_left = cv2.threshold(roi_left, 0, 255,
+                             cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+
+    win_normalized = np.divide(wins_the_round, 255)
+    roi_right_normalized = np.divide(roi_right, 255)
+    roi_left_normalized = np.divide(roi_left, 255)
+
+    norm_right = np.sum(abs(win_normalized - roi_right_normalized))
+    norm_left = np.sum(abs(win_normalized - roi_left_normalized))
+
+    return not (norm_right <= detection_threshold_for_wins_the_round or norm_left <= detection_threshold_for_wins_the_round)
 
 
 class RoundDetector:
@@ -68,7 +92,10 @@ class RoundDetector:
             current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
             current_timestamp = util.sec_to_timestamp(current_sec)
 
-            if not left_detected:
+            # first check if the string 'wins the round !' is visible... if so... do not detect round begin, it's one round before
+            correct_round_start = check_correct_round_start(image_np)
+
+            if not left_detected and correct_round_start:
                 # process left round
                 out_left = self.get_number_left(image_np)
                 if debug:
@@ -76,12 +103,12 @@ class RoundDetector:
 
                 if out_left == target_round_left:
                     nr_left_detected += 1
-                    if nr_left_detected >= detection_threshold:
+                    if nr_left_detected >= detection_threshold_for_number:
                         if debug:
                             print("left round detected")
                         left_detected = True
 
-            if not right_detected:
+            if not right_detected and correct_round_start:
                 # process right round
                 out_right = self.get_number_right(image_np)
                 if debug:
@@ -89,7 +116,7 @@ class RoundDetector:
 
                 if out_right == target_round_right:
                     nr_right_detected += 1
-                    if nr_right_detected >= detection_threshold:
+                    if nr_right_detected >= detection_threshold_for_number:
                         if debug:
                             print("right round detected")
                         right_detected = True
