@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
-import logging
+import logging as logger
 import util.detection_utils as util
+logger.basicConfig(format='%(levelname)s: %(asctime)s %(message)s', level=logger.DEBUG)
 
 
 def binarize(roi):
@@ -9,16 +10,23 @@ def binarize(roi):
                          cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
 
-# debug = True
-debug = False
+debug = True
+# debug = False
 detection_threshold = 60
-norm_threshold = 3000
+norm_threshold = 20
 skull = cv2.imread('images/skull/skull.png', 0)
 
+video_path = 'D:/gamestory18-data/train_set/2018-03-02_P11.mp4'
 
-def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, team='CT'):
+cap = cv2.VideoCapture(video_path)
+fps = cap.get(cv2.CAP_PROP_FPS)
+
+max_duration = 20000
+
+
+def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, ntk_kill=1):
     if debug:
-        logging.info("Start detecting first kill for " + team + " from: " + str(start_pos_in_video_sec) + " until:" + str(
+        logger.info("Start detecting " + str(ntk_kill) + " kill from: " + str(start_pos_in_video_sec) + " until:" + str(
             end_pos_in_video_sec))
 
     cap = cv2.VideoCapture(video_path)
@@ -31,7 +39,7 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
     current_frame = frame_pos_start
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos_start)
 
-    detection_map = [0, 0, 0, 0, 0]  # norm must be 60x under norm_threshold
+    detection_map = np.zeros(10)  # norm must be 60x under norm_threshold
 
     while current_frame <= frame_pos_end:
         ret, image_np = cap.read()
@@ -45,19 +53,22 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
         if debug:
             cv2.imshow('kill', image_np)
 
-        # roi for skull/kill detection roi[0] - roi[4] are CounterTerrorists
-        if team == 'CT':
-            roi = [image_gray[239:255, 611:624], image_gray[262:278, 611:624], image_gray[285:301, 611:624],
-                   image_gray[307:323, 611:624], image_gray[330:346, 611:624]]
-        else:
-            roi = [image_gray[239:255, 16:29], image_gray[262:278, 16:29], image_gray[285:301, 16:29],
-                   image_gray[307:323, 16:29], image_gray[330:346, 16:29]]
+
+        roi = [image_gray[239:255, 611:624], image_gray[262:278, 611:624], image_gray[285:301, 611:624],
+               image_gray[307:323, 611:624], image_gray[330:346, 611:624],
+               image_gray[239:255, 16:29], image_gray[262:278, 16:29], image_gray[285:301, 16:29],
+               image_gray[307:323, 16:29], image_gray[330:346, 16:29]
+               ]
 
         # binarize roi
         roi_binarized = [binarize(roi) for roi in roi]
-        # calculate L1 norm with skul.png
-        l1_norms = [np.linalg.norm(skull.ravel() - roi.ravel(), ord=1) for roi in roi_binarized]
+        # normalize roi
+        roi_normalized = [np.divide(roi, 255) for roi in roi_binarized]
 
+        # calculate L1 norm with skul.png
+        np.sum(abs(np.divide(skull, 255) - roi_normalized))
+        l1_norms = [np.sum(abs(np.divide(skull, 255) - roi_normalized)) for roi_normalized in roi_normalized]
+        print(l1_norms)
         i = 0
         for norm in l1_norms:
             if norm <= norm_threshold:
@@ -65,7 +76,7 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
             if detection_map[i] >= detection_threshold:
                 if debug:
                     cv2.destroyAllWindows()
-                logging.info("Detected first kill at: " + util.sec_to_timestamp(current_sec))
+                logger.info("Detected first kill at: " + util.sec_to_timestamp(current_sec))
                 return current_sec
             i += 1
 
@@ -78,3 +89,7 @@ def get_first_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path,
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
+
+
+get_nth_kill_sec(4010, 4500, video_path, 1)
+
