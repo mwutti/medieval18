@@ -6,6 +6,7 @@ import round_detector
 import show_extractor
 import os
 import util.detection_utils as util
+import video_summarizer
 
 # debug = True
 debug = False
@@ -21,6 +22,8 @@ search_kill_offset_sec = 1
 clipping_offset_before_sec = 5
 clipping_offset_after_sec = 12
 max_killstreak_length = 20
+detect_killstreaks = True
+extract_shows = True
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
 
 def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin,
@@ -144,16 +147,18 @@ def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, stream_beg
                             stream_begin_sec, match_begin_timestamp_utc):
     # detect 5-Killstreaks
     if os.path.exists(killstreak_dest_video_path + '/5/metadata.json'):
-        logger.info("5-Killstreaks for match " + str(
-            i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/5/metadata.json to redetect killstreaks')
+        if debug:
+            logger.info("5-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/5/metadata.json to redetect killstreaks')
     elif 5 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[5]:
             extract_killstreak(killstreak, 5, 1, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc)
 
     # detect 4-Killstreaks
     if os.path.exists(killstreak_dest_video_path + '/4/metadata.json'):
-        logger.info("4-Killstreaks for match " + str(
-            i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/4/metadata.json to redetect killstreaks')
+        if debug:
+            logger.info("4-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/4/metadata.json to redetect killstreaks')
     elif 4 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[4]:
             # determine how many kills where performed
@@ -162,8 +167,9 @@ def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, stream_beg
 
     # detect 3-Killstreaks
     if os.path.exists(killstreak_dest_video_path + '/3/metadata.json'):
-        logger.info("3-Killstreaks for match " + str(
-            i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/3/metadata.json to redetect killstreaks')
+        if debug:
+            logger.info("3-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/3/metadata.json to redetect killstreaks')
     elif 3 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[4]:
             # determine how many kills where performed
@@ -185,9 +191,9 @@ print(kill_detector.skull)
 
 metadata_csv = util.read_metadata_csv()
 
-detect_killstreaks = False
 if detect_killstreaks:
     round_detector = round_detector.RoundDetector()
+    logger.info('Start etracting killstreaks')
     # iterate over all 11 matches from 1.json - 11.json
     for i in range(1, 12):
         # 10.json is not correct!
@@ -215,8 +221,9 @@ if detect_killstreaks:
 
     [log_killstreak_to_file(i) for i in range(3, 6)]
 
-extract_shows = True
 if extract_shows:
-    logger.info('Etracting shows')
+    logger.info('Start etracting shows')
     show_extractor.extract_shows(metadata_csv, src_video_path, shows_dest_video_path)
+
+video_summarizer.summarize()
 
