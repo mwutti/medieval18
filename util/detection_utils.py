@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime
+import subprocess
 
 
 def timestamp_to_sec(timestamp):
@@ -45,3 +46,12 @@ def get_match_begin_in_player_stream(matchnr, metadata, player_id):
     for entry in metadata:
         if entry[3] == 'match' and entry[4] == str(matchnr) and entry[5] == 'P' + str(player_id):
             return entry
+
+
+def cut_video_within_boundaries(src_path_to_video, begin_sec, duration_sec, dest_video_name):
+    subprocess.call(
+        ['ffmpeg', '-loglevel', 'warning', '-ss', str(begin_sec), '-i', src_path_to_video, '-t', str(duration_sec), dest_video_name])
+
+
+# def cut_video_within_boundaries_slow(src_path_to_video, begin_sec, duration_sec, dest_video_name):
+#     subprocess.call(['ffmpeg', '-i', src_path_to_video, '-ss', str(begin_sec), '-t', str(duration_sec), dest_video_name])
