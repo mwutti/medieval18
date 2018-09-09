@@ -14,11 +14,7 @@
       <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_7.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_7.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_8.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_8.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/killstreaks/killstreaks_9.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/killstreaks/killstreaks_9.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kill_detector_debug.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/killstreak_clipper.py" beforeDir="false" afterPath="$PROJECT_DIR$/killstreak_clipper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/killstreak_klipper_debug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/round_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/round_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todelete/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_summarizer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +50,8 @@
           <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="87" />
+                <state relative-caret-position="153">
+                  <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -63,11 +59,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="video_summarizer.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="video_summarizer.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/video_summarizer.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="551">
-                  <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+                <state relative-caret-position="441">
+                  <caret line="54" selection-start-line="54" selection-end-line="54" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -84,11 +80,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="metadata.csv" pinned="false" current-in-tab="false">
+          <file leaf-file-name="metadata.csv" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/data/metadata.csv">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
-                  <caret line="46" column="67" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="67" />
+                <state relative-caret-position="692">
+                  <caret line="217" column="60" selection-start-line="217" selection-start-column="60" selection-end-line="217" selection-end-column="60" />
                 </state>
               </provider>
             </entry>
@@ -96,8 +92,8 @@
           <file leaf-file-name="round_detector.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/round_detector.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+                <state relative-caret-position="68">
+                  <caret line="8" selection-start-line="8" selection-end-line="8" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -112,8 +108,8 @@
           <file leaf-file-name="detection_utils.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/util/detection_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+                <state relative-caret-position="357">
+                  <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -124,11 +120,8 @@
           <file leaf-file-name="number_classifier_test.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/number_classifier_test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-                  <folding>
-                    <element signature="e#0#10#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="17">
+                  <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -146,16 +139,13 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dest_video_name</find>
-      <find>100</find>
-      <find>ret</find>
       <find>get_double_number_right</find>
       <find>GRAYSCALE</find>
       <find>imread</find>
       <find>28</find>
       <find>dataset</find>
       <find>dty</find>
-      <find />
+      <find>object detection</find>
       <find>round_detector</find>
       <find>os</find>
       <find>10</find>
@@ -167,7 +157,7 @@
       <find>round</find>
       <find>add_killstreak_to_list</find>
       <find>skul</find>
-      <find />
+      <find>start tr</find>
       <find>all_rounds_data</find>
       <find>zeros</find>
       <find>killstreak_length</find>
@@ -176,6 +166,9 @@
       <find>detection_threshold</find>
       <find>match</find>
       <find>add_kill</find>
+      <find>clipping_offset_sec</find>
+      <find>clipping_offset_before_sec</find>
+      <find>show</find>
     </findStrings>
     <replaceStrings>
       <replace>loser</replace>
@@ -232,8 +225,8 @@
         <option value="$PROJECT_DIR$/round_detector.py" />
         <option value="D:/gamestory18-data/killstreaks/3/metadata.json" />
         <option value="D:/gamestory18-data/killstreaks/5/metadata.json" />
-        <option value="$PROJECT_DIR$/killstreak_clipper.py" />
         <option value="$PROJECT_DIR$/video_summarizer.py" />
+        <option value="$PROJECT_DIR$/killstreak_clipper.py" />
       </list>
     </option>
   </component>
@@ -256,6 +249,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,7 +265,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -465,16 +458,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2496" height="1407" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985553" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32985553" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3282504" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30738363" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15968801" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3282504" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30738363" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16091955" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.24876848" />
@@ -516,22 +508,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/killstreak_clipper.py</url>
-          <line>149</line>
+          <line>159</line>
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/killstreak_clipper.py</url>
-          <line>180</line>
+          <line>190</line>
           <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/killstreak_clipper.py</url>
-          <line>94</line>
+          <line>104</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/killstreak_clipper.py</url>
-          <line>190</line>
+          <line>200</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
       </breakpoints>
@@ -553,7 +545,7 @@
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>str(__file__).replace(&quot;number_classifier.py&quot;, &quot;&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -568,27 +560,28 @@
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>classifier.predict(cv2.imread(dest_path + '/2/2.png', 0).reshape(1,-1))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>classifier.predict(cv2.imread(dest_path + '/2/2.png', 0).reshape(1,-1).astype(np.float64))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>image = cv2.imread(dest_path + '/2/2.png', 0)
+classifier.predict(image.reshape(1,-1))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>image = cv2.imread(dest_path + '/2/2.png', 0)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>cv2.imread(dest_path + '/2/2.png', 0)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -615,7 +608,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>os.path.join(sorted_by_match_map[match][killstreak], sorted_by_match_map[match]['file_name'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -635,7 +628,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>sorted(temp[int(matchNr)], key=itemgetter('killstreak_begin_sec'))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -693,9 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,13 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/metadata.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="46" column="67" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/svm/number_classifier.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -829,50 +812,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/util/detection_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        <state relative-caret-position="357">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/win_round/right/wins_the_round.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kill_detector_debug.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="69" column="71" lean-forward="true" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/images/win_round/right/wins_the_round.png" />
+    <entry file="file://$PROJECT_DIR$/kill_detector_debug.py" />
     <entry file="file://$PROJECT_DIR$/images/win_round/wins_the_round.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/wins_the_round.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killstreak_klipper_debug.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/wins_the_round.py" />
+    <entry file="file://$PROJECT_DIR$/killstreak_klipper_debug.py" />
     <entry file="file://D:/gamestory18-data/killstreaks/3/metadata.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -887,43 +841,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/number_classifier_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/round_detector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="68">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/video_summarizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+        <state relative-caret-position="441">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/number_classifier_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/metadata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="692">
+          <caret line="217" column="60" selection-start-line="217" selection-start-column="60" selection-end-line="217" selection-end-column="60" />
         </state>
       </provider>
     </entry>

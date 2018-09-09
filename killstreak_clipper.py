@@ -4,6 +4,7 @@ import logging as logger
 import kill_detector
 import round_detector
 import os
+import subprocess
 import util.detection_utils as util
 
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
@@ -18,7 +19,8 @@ metadata_csv = util.read_metadata_csv()
 first_match_utc = ''
 search_round_offset_sec = 40
 search_kill_offset_sec = 1
-clipping_offset_sec = 5
+clipping_offset_before_sec = 5
+clipping_offset_after_sec = 12
 max_killstreak_length = 20
 round_detector = round_detector.RoundDetector()
 
@@ -26,15 +28,21 @@ killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
 
 skull = kill_detector.skull
 
-def cut_video_within_boundaries(src_path_to_video, begin_sec, end_sec, dest_video_name):
-    ffmpeg_extract_subclip(src_path_to_video, begin_sec, end_sec, targetname=dest_video_name)
+
+def cut_video_within_boundaries(src_path_to_video, begin_sec, duration_sec, dest_video_name):
+    subprocess.call(['ffmpeg','-ss', str(begin_sec), '-i', src_path_to_video, '-t', str(duration_sec), dest_video_name])
 
 
-def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin, killstreak_begin, estimated_begin, estimated_end):
+def cut_video_within_boundaries_slow(src_path_to_video, begin_sec, duration_sec, dest_video_name):
+    subprocess.call(['ffmpeg', '-i', src_path_to_video, '-ss', str(begin_sec), '-t', str(duration_sec), dest_video_name])
+
+
+def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin,
+                           killstreak_begin, estimated_begin, estimated_end):
     target_killstreak_list = killstreaks['killstreaks'][nrOfKills]
 
     target_killstreak_list[dest_video_name] = {}
-    target_killstreak_list[dest_video_name]['duration'] = killstreak_duration_sec + 2 * clipping_offset_sec
+    target_killstreak_list[dest_video_name]['duration'] = killstreak_duration_sec + clipping_offset_before_sec + clipping_offset_after_sec
     target_killstreak_list[dest_video_name]['match'] = str(i)
     target_killstreak_list[dest_video_name]['round'] = str(round_idx)
     target_killstreak_list[dest_video_name]['round_begin'] = round_begin
@@ -70,13 +78,15 @@ def extract_killstreaks(killstreak, killstreak_length, nth_kill):
 
     # Only killstreak which are shorter than max_killstreak_length are considered
     if util.timestamp_to_sec(str(killstreak_duration)) < max_killstreak_length:
-        logger.info('Looking for ' + str(killstreak_length) + '-Killstreak in match ' + str(i) + '. Begin of match at ' + util.sec_to_timestamp(
+        logger.info('Looking for ' + str(killstreak_length) + '-Killstreak in match ' + str(
+            i) + '. Begin of match at ' + util.sec_to_timestamp(
             stream_begin_sec))
 
         start_pos_in_video_sec = stream_begin_sec + util.timestamp_to_sec(
             str(difference_between_match_begin_and_killstreak_begin))
 
-        dest_video_name = 'killstreak_' + str(killstreak_length) + '_round_' + str(round_idx) + '_begin_' + util.sec_to_timestamp(
+        dest_video_name = 'killstreak_' + str(killstreak_length) + '_round_' + str(
+            round_idx) + '_begin_' + util.sec_to_timestamp(
             start_pos_in_video_sec - 5).replace(':', '_') + '_' + stream_begin_row[6]
 
         end_pos_in_video_sec = start_pos_in_video_sec + killstreak_duration_sec
@@ -108,8 +118,8 @@ def extract_killstreaks(killstreak, killstreak_length, nth_kill):
 
         # Detect the start time in seconds of the first kill of the killstreak
         killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec,
-                                                                end_pos_in_video_sec + search_round_offset_sec,
-                                                                video_full_name, nth_kill)
+                                                              end_pos_in_video_sec + search_round_offset_sec,
+                                                              video_full_name, nth_kill)
 
         if killstreak_begin_sec is None:
             logger.warning('Unable to detect killstreak begin, skip this killstreak')
@@ -117,12 +127,12 @@ def extract_killstreaks(killstreak, killstreak_length, nth_kill):
             # Log Killstreak to file
             add_killstreak_to_list(killstreak_length, dest_video_name, killstreak_duration_sec, round_idx,
                                    util.sec_to_timestamp(round_begin_sec), util.sec_to_timestamp(killstreak_begin_sec),
-                                   util.sec_to_timestamp(start_pos_in_video_sec), util.sec_to_timestamp(end_pos_in_video_sec))
+                                   util.sec_to_timestamp(start_pos_in_video_sec),
+                                   util.sec_to_timestamp(end_pos_in_video_sec))
 
             # Cut the video and store it
-            cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_sec,
-                                        killstreak_begin_sec + util.timestamp_to_sec(
-                                            str(killstreak_duration)) + clipping_offset_sec,
+            cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_before_sec,
+                                        util.timestamp_to_sec(str(killstreak_duration)) + clipping_offset_after_sec,
                                         dest_video_path + '/' + str(killstreak_length) + '/' + dest_video_name)
     else:
         logger.info("Killstreak duration in match " + str(i) + ": " + str(
