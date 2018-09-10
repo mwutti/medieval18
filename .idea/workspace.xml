@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,7 +54,9 @@
             <entry file="file://$PROJECT_DIR$/readme.md">
               <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
                 <state split_layout="SPLIT">
-                  <first_editor />
+                  <first_editor relative-caret-position="68">
+                    <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
+                  </first_editor>
                   <second_editor />
                 </state>
               </provider>
@@ -239,7 +242,6 @@
         <option value="$PROJECT_DIR$/detector_copy.py" />
         <option value="$PROJECT_DIR$/visualization_utils.py" />
         <option value="$PROJECT_DIR$/detector.py" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/mnist-train.py" />
         <option value="$PROJECT_DIR$/number_detector.py" />
         <option value="$PROJECT_DIR$/data/killstreaks/killstreaks_1.json" />
@@ -278,6 +280,7 @@
         <option value="$PROJECT_DIR$/highlight_extractor.py" />
         <option value="$PROJECT_DIR$/killstreak_clipper.py" />
         <option value="$PROJECT_DIR$/video_summarizer.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -514,7 +517,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2496" height="1407" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985553" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
@@ -522,8 +524,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32985553" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3282504" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30738363" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16215107" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30738363" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16215107" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.24876848" />
@@ -940,7 +942,9 @@ classifier.predict(image.reshape(1,-1))</expression-string>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor />
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
+          </first_editor>
           <second_editor />
         </state>
       </provider>

@@ -1,3 +1,5 @@
 video
 data/img
 training/coco
+.idea
+__pycache__
