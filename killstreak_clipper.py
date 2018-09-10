@@ -4,6 +4,7 @@ import logging as logger
 import kill_detector
 import round_detector
 import show_extractor
+import highlight_extractor
 import os
 import util.detection_utils as util
 import video_summarizer
@@ -16,14 +17,18 @@ src_video_path = 'D:/gamestory18-data/train_set'
 killstreak_dest_video_path = 'D:/gamestory18-data/killstreaks'
 last_round_dest_video_path = 'D:/gamestory18-data/last_round'
 shows_dest_video_path = 'D:/gamestory18-data/shows'
+highlight_dest_video_path = 'D:/gamestory18-data/highlights'
 first_match_utc = ''
 search_round_offset_sec = 40
 search_kill_offset_sec = 1
 clipping_offset_before_sec = 5
 clipping_offset_after_sec = 12
 max_killstreak_length = 20
-detect_killstreaks = True
-extract_shows = True
+
+detect_killstreaks = False
+extract_shows = False
+extract_highlights = True
+
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
 
 def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin,
@@ -186,14 +191,13 @@ for j in range(3, 6):
 if not os.path.exists(last_round_dest_video_path):
     os.makedirs(last_round_dest_video_path)
 
-logger.info("Starting Killstreak-Clipper")
 print(kill_detector.skull)
 
 metadata_csv = util.read_metadata_csv()
 
 if detect_killstreaks:
     round_detector = round_detector.RoundDetector()
-    logger.info('Start etracting killstreaks')
+    logger.info('Start extracting killstreaks')
     # iterate over all 11 matches from 1.json - 11.json
     for i in range(1, 12):
         # 10.json is not correct!
@@ -222,8 +226,12 @@ if detect_killstreaks:
     [log_killstreak_to_file(i) for i in range(3, 6)]
 
 if extract_shows:
-    logger.info('Start etracting shows')
+    logger.info('Start extracting shows')
     show_extractor.extract_shows(metadata_csv, src_video_path, shows_dest_video_path)
 
-video_summarizer.summarize()
+if extract_highlights:
+    logger.info('Start extracting highlights')
+    highlight_extractor.extract_highlights(metadata_csv, src_video_path, highlight_dest_video_path)
+
+# video_summarizer.summarize()
 
