@@ -11,8 +11,8 @@ def extract_highlights(metadata, src_video_path, dest_video_path, only_metadata=
     if not os.path.exists(dest_video_path):
         os.makedirs(dest_video_path)
 
-    # show start sec, show_duration_sec, video_name, show_start_utc
-    highlights = [[entry[1], entry[2], entry[6], entry[8]] for entry in metadata if entry[3] == 'highlight']
+    # show start sec, show_duration_sec, video_name, show_start_utc, match
+    highlights = [[entry[1], entry[2], entry[6], entry[8], entry[4]] for entry in metadata if entry[3] == 'highlight']
     total_duration = 0
 
     if not os.path.exists(dest_video_path + '/metadata.json'):
@@ -22,6 +22,7 @@ def extract_highlights(metadata, src_video_path, dest_video_path, only_metadata=
             player_stream = highlight[2].split('.')[0].split('_')[1]
             highlight_start = int(highlight[0]) - highlight_start_offset
             highlight_date = highlight[2].split('_')[0]
+            match = highlight[4]
 
             if i == 0:
                 highlight_duration = int(highlight[1]) + highlight_end_offset
@@ -40,7 +41,8 @@ def extract_highlights(metadata, src_video_path, dest_video_path, only_metadata=
                                                      'src_file': os.path.join(src_video_path, highlight[2]),
                                                      'target_file': os.path.join(dest_video_path, filename),
                                                      'player_stream': player_stream,
-                                                     'highlight_date': highlight_date})
+                                                     'highlight_date': highlight_date,
+                                                     'match': int(match)})
 
             i += 1
 

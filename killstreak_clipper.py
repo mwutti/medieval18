@@ -232,6 +232,5 @@ if extract_shows:
 if extract_highlights:
     logger.info('Start extracting highlights')
     highlight_extractor.extract_highlights(metadata_csv, src_video_path, highlight_dest_video_path)
-
-# video_summarizer.summarize()
+video_summarizer.summarize_highlights_under_max_duration(20)
 

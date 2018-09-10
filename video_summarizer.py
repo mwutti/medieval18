@@ -9,12 +9,15 @@ logger.basicConfig(format='%(levelname)s: %(asctime)s %(message)s', level=logger
 
 killstreak_path = 'D:/gamestory18-data/killstreaks'
 shows_path = 'D:/gamestory18-data/shows'
+highlights_path = 'D:/gamestory18-data/highlights'
 dest_path = 'D:/gamestory18-data/final'
+dest_path_highlights = 'D:/gamestory18-data/final/highlights'
 
 killstreak_5_path = os.path.join(killstreak_path, '5')
 killstreak_4_path = os.path.join(killstreak_path, '4')
 
 list_file_path = os.path.join(dest_path, "files.txt")
+list_file_path_highlights_under_max_duration = os.path.join(dest_path_highlights, "files.txt")
 target_video_path = os.path.join(dest_path, "final.mp4")
 
 def get_map_sorted_by_match():
@@ -49,23 +52,16 @@ def get_shows_sorted_by_begin():
         return sorted(shows, key=itemgetter('show_start_sec'))
 
 
+def get_highlights_sorted_by_match():
+    with open(os.path.join(highlights_path, 'metadata.json'), 'r') as f:
+        metadata = json.load(f)
+        highlights = metadata['highlights']
+        return sorted(highlights, key=itemgetter('match'))
+
+
 def summarize():
     total_duration = 0
     if os.path.exists(os.path.join(killstreak_path, '5')):
-        # total duration
-        with open(os.path.join(killstreak_5_path, 'metadata.json'), 'r') as f:
-            metadata = json.load(f)
-            for video in metadata['killstreaks']['5']:
-                duration = metadata['killstreaks']['5'][video]['duration']
-                total_duration += int(duration)
-
-        with open(os.path.join(killstreak_4_path, 'metadata.json'), 'r') as f:
-            metadata = json.load(f)
-            for video in metadata['killstreaks']['4']:
-                duration = metadata['killstreaks']['4'][video]['duration']
-                total_duration += int(duration)
-        logger.info('total duration: ' + util.sec_to_timestamp(total_duration))
-
         sorted_by_match_map = get_map_sorted_by_match()
         shows = get_shows_sorted_by_begin()
 
@@ -93,3 +89,15 @@ def summarize():
 
     else:
         logger.error("Killstreak path does not exist")
+
+def summarize_highlights_under_max_duration(max_duration):
+    if os.path.exists(os.path.join(highlights_path, 'metadata.json')):
+        highlights = get_highlights_sorted_by_match()
+        filenames = []
+
+        if len(highlights) > 0:
+            filenames.append([highlight['target_file'] for highlight in highlights
+                              if highlight['highlight_duration'] <= max_duration and highlight['player_stream'] == 'P11'])
+
+        with open(list_file_path_highlights_under_max_duration, 'w') as file:
+            [file.write("file " + "'" + line + "'\n") for line in filenames[0]]
