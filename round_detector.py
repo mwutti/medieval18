@@ -4,8 +4,8 @@ import logging
 import svm.number_classifier as classifier
 import util.detection_utils as util
 
-# debug = True
-debug = False
+debug = True
+# debug = False
 
 video_path = 'D:/gamestory18-data/train_set'
 wins_the_round = cv2.imread('images/win_round/wins_the_round.png', 0)
@@ -13,14 +13,23 @@ wins_the_round = cv2.imread('images/win_round/wins_the_round.png', 0)
 image_width = 28
 nr_of_samples = image_width * image_width
 
-pos_y1 = 10
-pos_y2 = 26
+pos_y1_P11 = 10
+pos_y2_P11 = 26
 
-pos_left_x1 = 274
-pos_left_x2 = 290
+pos_left_x1_P11 = 274
+pos_left_x2_P11 = 290
 
-pos_right_x1 = 349
-pos_right_x2 = 365
+pos_right_x1_P11 = 349
+pos_right_x2_P11 = 365
+
+pos_y1_Pn = 2
+pos_y2_Pn = 18
+
+pos_left_x1_Pn = 275
+pos_left_x2_Pn = 291
+
+pos_right_x1_Pn = 346
+pos_right_x2_Pn = 362
 
 detection_threshold_for_number = 100
 detection_threshold_for_wins_the_round = 200
@@ -64,7 +73,7 @@ class RoundDetector:
         self.classifier.train_classifier()
 
     def get_round_begin(self, start_pos_in_video_sec, end_pos_in_video_sec, video_full_name, target_round_left,
-                        target_round_right):
+                        target_round_right, player_stream='P11'):
         logging.info('Looking for ' + str(target_round_left) + ':' + str(
             target_round_right) + ' in video ' + video_full_name + ' from ' + util.sec_to_timestamp(
             start_pos_in_video_sec) + ' to ' + util.sec_to_timestamp(end_pos_in_video_sec))
@@ -81,7 +90,7 @@ class RoundDetector:
         nr_left_detected = 0
         nr_right_detected = 0
         left_detected = False
-        right_detected = True
+        right_detected = False
 
         while not (left_detected and right_detected) and current_frame <= frame_pos_end:
             ret, image_np = cap.read()
@@ -97,9 +106,9 @@ class RoundDetector:
 
             if not left_detected and correct_round_start:
                 # process left round
-                out_left = self.get_number_left(image_np)
+                out_left = self.get_number_left(image_np, player_stream=player_stream)
                 if debug:
-                    print("Left: " + out_left)
+                    print("Left: " + str(out_left))
 
                 if out_left == target_round_left:
                     nr_left_detected += 1
@@ -110,9 +119,9 @@ class RoundDetector:
 
             if not right_detected and correct_round_start:
                 # process right round
-                out_right = self.get_number_right(image_np)
+                out_right = self.get_number_right(image_np, player_stream=player_stream)
                 if debug:
-                    print("Right: " + out_right)
+                    print("Right: " + str(out_right))
 
                 if out_right == target_round_right:
                     nr_right_detected += 1
@@ -131,18 +140,32 @@ class RoundDetector:
                     cv2.destroyAllWindows()
                     break
 
-    def get_number_left(self, image):
-        roi_left = image[pos_y1:pos_y2, pos_left_x1:pos_left_x2]
+    def get_number_left(self, image, player_stream='P11'):
+        if player_stream == 'P11':
+            roi_left = image[pos_y1_P11:pos_y2_P11, pos_left_x1_P11:pos_left_x2_P11]
+        else:
+            roi_left = image[pos_y1_Pn:pos_y2_Pn, pos_left_x1_Pn:pos_left_x2_Pn]
+
         roi_left_prepared = prepare_for_classifier(roi_left)
 
         if debug:
+            roi_left = cv2.cvtColor(roi_left, cv2.COLOR_BGR2GRAY)  # convert Image to grayscale
+            roi_left = cv2.resize(roi_left, dsize=(image_width, image_width),
+                                   interpolation=cv2.INTER_CUBIC)  # Resize and interpolate
             cv2.imshow('object detection_left', roi_left)
         return self.classifier.predict(roi_left_prepared)
 
-    def get_number_right(self, image):
-        roi_right = image[pos_y1:pos_y2, pos_right_x1:pos_right_x2]
+    def get_number_right(self, image, player_stream='P11'):
+        if player_stream == 'P11':
+            roi_right = image[pos_y1_P11:pos_y2_P11, pos_right_x1_P11:pos_right_x2_P11]
+        else:
+            roi_right = image[pos_y1_Pn:pos_y2_Pn, pos_right_x1_Pn:pos_right_x2_Pn]
+
         roi_right_prepared = prepare_for_classifier(roi_right)
 
         if debug:
+            roi_right = cv2.cvtColor(roi_right, cv2.COLOR_BGR2GRAY)  # convert Image to grayscale
+            roi_right = cv2.resize(roi_right, dsize=(image_width, image_width),
+                               interpolation=cv2.INTER_CUBIC)  # Resize and interpolate
             cv2.imshow('object detection_right', roi_right)
         return self.classifier.predict(roi_right_prepared)
