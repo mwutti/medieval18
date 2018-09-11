@@ -9,8 +9,8 @@ import os
 import util.detection_utils as util
 import video_summarizer
 
-# debug = True
-debug = False
+debug = True
+# debug = False
 
 logger.basicConfig(format='%(levelname)s: %(asctime)s %(message)s', level=logger.DEBUG)
 src_video_path = 'D:/gamestory18-data/train_set'
@@ -30,6 +30,8 @@ extract_shows = False
 extract_highlights = False
 
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
+
+player_id_to_name_map = {'P11': '', 2: '', 3: '', 4: '', 5: '', 6: '', 'olofmeister': '7', 'NiKo': '8', 9: '', 10: ''}
 
 
 def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin,
@@ -131,7 +133,7 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
         # Detect the start time in seconds of the first kill of the killstreak
         killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec,
                                                               end_pos_in_video_sec + search_round_offset_sec,
-                                                              video_full_name, nth_kill)
+                                                              video_full_name, nth_kill, player_stream=player_stream)
 
         if killstreak_begin_sec is None:
             logger.warning('Unable to detect killstreak begin, skip this killstreak')
@@ -206,8 +208,8 @@ for j in range(3, 6):
 if not os.path.exists(last_round_dest_video_path):
     os.makedirs(last_round_dest_video_path)
 
-print(kill_detector.skull)
-
+print(kill_detector.skully)
+#
 metadata_csv = util.read_metadata_csv()
 
 if detect_killstreaks:

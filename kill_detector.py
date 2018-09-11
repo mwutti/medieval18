@@ -11,19 +11,31 @@ def binarize(roi):
 
 # debug = True
 debug = False
-detection_threshold = 20
-norm_threshold = 20
-skull = cv2.imread('images/skull/skull.png', 0)
+detection_threshold = 5
+
+skully = cv2.imread('images/skull/skull.png', 0)
 
 
-def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, nth_kill=1):
+def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, nth_kill=1, player_stream='P11'):
     # if debug:
     logger.info("Start detecting " + str(nth_kill) + " kill from: " + util.sec_to_timestamp(
         start_pos_in_video_sec) + " until:" + util.sec_to_timestamp(
         end_pos_in_video_sec))
 
+    if player_stream == 'P11':
+        skull = cv2.imread('images/skull/skull.png', 0)
+        norm_threshold = 20
+    else:
+        skull = cv2.imread('images/skull/skull_Pn.png', 0)
+        norm_threshold = 30
+
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
+    # # todo delete
+    # start_pos_in_video_sec = 7745
+    # end_pos_in_video_sec = 7835
+    # nth_kill = 10
+
     nr_of_frames = 0
 
     frame_pos_start = int(start_pos_in_video_sec * fps)
@@ -46,21 +58,51 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
         if debug:
             cv2.imshow('kill', image_np)
 
-        # TODO refactore positions into properties file
-        roi = [image_gray[239:255, 611:624], image_gray[262:278, 611:624], image_gray[285:301, 611:624],
-               image_gray[307:323, 611:624], image_gray[330:346, 611:624],
-               image_gray[239:255, 16:29], image_gray[262:278, 16:29], image_gray[285:301, 16:29],
-               image_gray[307:323, 16:29], image_gray[330:346, 16:29]
-               ]
+        # TODO refactor positions into properties file
+        if player_stream == 'P11':
+            roi = [image_gray[239:255, 611:624],
+                   image_gray[262:278, 611:624],
+                   image_gray[285:301, 611:624],
+                   image_gray[307:323, 611:624],
+                   image_gray[330:346, 611:624],
+                   image_gray[239:255, 16:29],
+                   image_gray[262:278, 16:29],
+                   image_gray[285:301, 16:29],
+                   image_gray[307:323, 16:29],
+                   image_gray[330:346, 16:29]
+                   ]
+        else:
+            roi = [image_gray[170:186, 624:637],
+                   image_gray[190:206, 624:637],
+                   image_gray[210:226, 624:637],
+                   image_gray[230:246, 624:637],
+                   image_gray[250:266, 624:637],
+                   image_gray[170:186, 3:16],
+                   image_gray[190:206, 3:16],
+                   image_gray[210:226, 3:16],
+                   image_gray[230:246, 3:16],
+                   image_gray[250:266, 3:16]
+                   ]
 
         # binarize roi
-        roi_binarized = [binarize(roi) for roi in roi]
+        roi = [binarize(roi) for roi in roi]
+
         # normalize roi
-        roi_normalized = [np.divide(roi, 255) for roi in roi_binarized]
+        roi_normalized = [np.divide(roi, 255) for roi in roi]
 
         # calculate L1 norm with skul.png
         np.sum(abs(np.divide(skull, 255) - roi_normalized))
         l1_norms = [np.sum(abs(np.divide(skull, 255) - roi_normalized)) for roi_normalized in roi_normalized]
+
+        # todo delete
+        # if nr_of_frames == 15:
+        #     cv2.imwrite('images/skull/skull_Pn.png', roi_binarized[9])
+
+        # print("2: " + str(l1_norms[0]))
+
+        # reset detection_map if no kills are visible
+        if len([norm for norm in l1_norms if norm <= norm_threshold]) == 0:
+            detection_map = np.zeros(10)
 
         i = 0
         for norm in l1_norms:
@@ -68,7 +110,8 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
                 detection_map[i] += 1
             i += 1
 
-        if (detection_map >= norm_threshold).sum() >= nth_kill:
+        # print((detection_map >= detection_threshold).sum())
+        if (detection_map >= detection_threshold).sum() == nth_kill:
             if debug:
                 cv2.destroyAllWindows()
             logger.info("Detected " + str(nth_kill) + " kill at: " + util.sec_to_timestamp(current_sec))
@@ -76,9 +119,10 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
 
         if debug:
             i = 0
-            for roi in roi_binarized:
-                cv2.imshow('roi_' + str(i), roi)
+            for image in roi:
+                cv2.imshow('roi_' + str(i), image)
                 i += 1
+            # cv2.imshow('roi_' + str(i), roi[9])
 
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()

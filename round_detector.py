@@ -4,8 +4,8 @@ import logging
 import svm.number_classifier as classifier
 import util.detection_utils as util
 
-debug = True
-# debug = False
+# debug = True
+debug = False
 
 video_path = 'D:/gamestory18-data/train_set'
 wins_the_round = cv2.imread('images/win_round/wins_the_round.png', 0)
