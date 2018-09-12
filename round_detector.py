@@ -28,8 +28,8 @@ pos_y2_Pn = 18
 pos_left_x1_Pn = 275
 pos_left_x2_Pn = 291
 
-pos_right_x1_Pn = 346
-pos_right_x2_Pn = 362
+pos_right_x1_Pn = 345
+pos_right_x2_Pn = 361
 
 detection_threshold_for_number = 100
 detection_threshold_for_wins_the_round = 200
@@ -73,7 +73,7 @@ class RoundDetector:
         self.classifier.train_classifier()
 
     def get_round_begin(self, start_pos_in_video_sec, end_pos_in_video_sec, video_full_name, target_round_left,
-                        target_round_right, player_stream='P11'):
+                        target_round_right, player_stream='P11', pos_at_one_round_detected=False):
         logging.info('Looking for ' + str(target_round_left) + ':' + str(
             target_round_right) + ' in video ' + video_full_name + ' from ' + util.sec_to_timestamp(
             start_pos_in_video_sec) + ' to ' + util.sec_to_timestamp(end_pos_in_video_sec))
@@ -102,9 +102,9 @@ class RoundDetector:
             current_timestamp = util.sec_to_timestamp(current_sec)
 
             # first check if the string 'wins the round !' is visible... if so... do not detect round begin, it's one round before
-            correct_round_start = check_correct_round_start(image_np)
+            # correct_round_start = check_correct_round_start(image_np)
 
-            if not left_detected and correct_round_start:
+            if not left_detected:
                 # process left round
                 out_left = self.get_number_left(image_np, player_stream=player_stream)
                 if debug:
@@ -117,7 +117,7 @@ class RoundDetector:
                             print("left round detected")
                         left_detected = True
 
-            if not right_detected and correct_round_start:
+            if not right_detected:
                 # process right round
                 out_right = self.get_number_right(image_np, player_stream=player_stream)
                 if debug:
@@ -131,6 +131,11 @@ class RoundDetector:
                         right_detected = True
 
             if left_detected and right_detected:
+                logging.info("Detected round start at " + current_timestamp)
+                return current_sec
+
+            if pos_at_one_round_detected and (left_detected or right_detected):
+                logging.warning("Just one round detected")
                 logging.info("Detected round start at " + current_timestamp)
                 return current_sec
 

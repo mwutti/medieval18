@@ -23,21 +23,19 @@ target_video_path = os.path.join(dest_path, "final.mp4")
 def get_map_sorted_by_match():
     result = {}
     temp = {}
-    with open(os.path.join(killstreak_5_path, 'metadata.json'), 'r') as f:
+    with open(os.path.join(killstreak_4_path, 'metadata.json'), 'r') as f:
         metadata = json.load(f)
         killstreaks = metadata['killstreaks']
         for nr_killstreaks in killstreaks:
-            # ignore 3-Killstreaks for now
-            if nr_killstreaks != '3':
-                for video_name in killstreaks[nr_killstreaks]:
-                    streak = killstreaks[nr_killstreaks][video_name]
-                    matchNr = streak['match']
-                    if int(matchNr) not in temp:
-                        temp[int(matchNr)] = []
+            for video_name in killstreaks[nr_killstreaks]:
+                streak = killstreaks[nr_killstreaks][video_name]
+                matchNr = streak['match']
+                if int(matchNr) not in temp:
+                    temp[int(matchNr)] = []
 
-                    streak['killstreak_nr'] = nr_killstreaks
-                    streak['file_name'] = video_name
-                    temp[int(matchNr)].append(streak)
+                streak['killstreak_nr'] = nr_killstreaks
+                streak['file_name'] = video_name
+                temp[int(matchNr)].append(streak)
 
     for match_nr in sorted(temp):
         result[match_nr] = sorted(temp[int(match_nr)], key=itemgetter('killstreak_begin_sec'))
@@ -101,3 +99,5 @@ def summarize_highlights_under_max_duration(max_duration):
 
         with open(list_file_path_highlights_under_max_duration, 'w') as file:
             [file.write("file " + "'" + line + "'\n") for line in filenames[0]]
+
+# summarize()

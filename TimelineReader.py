@@ -1,4 +1,8 @@
 import json
+import os
+import inspect
+
+base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
 
 # Preprocessing of json data
 def preprocess(data):
@@ -88,7 +92,7 @@ def sort_kill_streaks(kill_streak_list):
 
 
 for i in range(1, 12):
-    json_file = open('timelines/' + str(i) + '.json')
+    json_file = open(base_dir + '/timelines/' + str(i) + '.json')
     all_rounds_data = preprocess(json.load(json_file))
     kill_streak_list = get_kill_streak_list(all_rounds_data)
 
@@ -96,5 +100,5 @@ for i in range(1, 12):
     sorted_kill_streak_list = sort_kill_streaks(kill_streak_list)
 
     # write json file
-    with open('data/killstreaks/killstreaks_' + str(i) + '.json', 'w') as file:
+    with open(base_dir + '/data/killstreaks/killstreaks_' + str(i) + '.json', 'w') as file:
         json.dump(sorted_kill_streak_list, file)

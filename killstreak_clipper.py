@@ -6,13 +6,15 @@ import round_detector
 import show_extractor
 import highlight_extractor
 import os
+import inspect
 import util.detection_utils as util
 import video_summarizer
 
-debug = True
-# debug = False
+# debug = True
+debug = False
 
 logger.basicConfig(format='%(levelname)s: %(asctime)s %(message)s', level=logger.DEBUG)
+base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
 src_video_path = 'D:/gamestory18-data/train_set'
 killstreak_dest_video_path = 'D:/gamestory18-data/killstreaks'
 last_round_dest_video_path = 'D:/gamestory18-data/last_round'
@@ -20,7 +22,8 @@ shows_dest_video_path = 'D:/gamestory18-data/shows'
 highlight_dest_video_path = 'D:/gamestory18-data/highlights'
 first_match_utc = ''
 search_round_offset_sec = 40
-search_kill_offset_sec = 1
+search_kill_offset_sec_before = 1
+search_kill_offset_sec_after = 10
 clipping_offset_before_sec = 5
 clipping_offset_after_sec = 12
 max_killstreak_length = 20
@@ -31,7 +34,17 @@ extract_highlights = False
 
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
 
-player_id_to_name_map = {'P11': '', 2: '', 3: '', 4: '', 5: '', 6: '', 'olofmeister': '7', 'NiKo': '8', 9: '', 10: ''}
+player_id_to_name_map_match_11 = {'GuardiaN': '1',
+                                  'olofmeister': '2',
+                                  'NiKo': '3',
+                                  'karrigan': '4',
+                                  'rain': '5',
+                                  'Golden': '6',
+                                  'Lekr0': '7',
+                                  'JW': '8',
+                                  'flusha': '9',
+                                  'KRIMZ': '10'
+                                           ''}
 
 
 def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, round_idx, round_begin,
@@ -125,18 +138,38 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
             round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
                                                              end_pos_in_video_sec + search_round_offset_sec,
                                                              video_full_name,
-                                                             target_round_T, target_round_CT, player_stream=player_stream)
+                                                             target_round_T, target_round_CT,
+                                                             player_stream=player_stream)
             if round_begin_sec is None:
-                logger.warning('Unable to detect round begin, skip this killstreak')
-                return
+                # try to detect just one round
+                logger.warning('Trying to detect just one round')
+                round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
+                                                                 end_pos_in_video_sec + search_round_offset_sec,
+                                                                 video_full_name,
+                                                                 target_round_CT, target_round_T,
+                                                                 player_stream=player_stream,
+                                                                 pos_at_one_round_detected=True)
+
+                if round_begin_sec is None:
+                    # swap the round numbers one last time
+                    logger.warning('Swapping the round numbers one last time')
+                    round_begin_sec = round_detector.get_round_begin(start_pos_in_video_sec - search_round_offset_sec,
+                                                                     end_pos_in_video_sec + search_round_offset_sec,
+                                                                     video_full_name,
+                                                                     target_round_T, target_round_CT,
+                                                                     player_stream=player_stream,
+                                                                     pos_at_one_round_detected=True)
+                    if round_begin_sec is None:
+                        logger.error("Unable to detect round")
+                        return
 
         # Detect the start time in seconds of the first kill of the killstreak
-        killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec,
-                                                              end_pos_in_video_sec + search_round_offset_sec,
+        killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec_before,
+                                                              end_pos_in_video_sec + search_round_offset_sec + search_kill_offset_sec_after,
                                                               video_full_name, nth_kill, player_stream=player_stream)
 
         if killstreak_begin_sec is None:
-            logger.warning('Unable to detect killstreak begin, skip this killstreak')
+            logger.error('Unable to detect killstreak begin, skip this killstreak')
         else:
             # Log Killstreak to file
             add_killstreak_to_list(killstreak_length, dest_video_name, killstreak_duration_sec, round_idx,
@@ -156,44 +189,105 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
             killstreak_duration_sec) + 'sec is above threshold of ' + str(max_killstreak_length))
 
 
-def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, stream_begin_row, player_stream='P11'):
-    stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
-    stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
-    match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
-
+def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=1, player_stream=False):
     # detect 5-Killstreaks
-    if os.path.exists(killstreak_dest_video_path + '/5/' + player_stream + '/metadata.json'):
+    if os.path.exists(killstreak_dest_video_path + '/5/metadata.json'):
         if debug:
             logger.info("5-Killstreaks for match " + str(
                 i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/5/metadata.json to redetect killstreaks')
     elif 5 in sorted_kill_streak_list:
         for killstreak in sorted_kill_streak_list[5]:
-            extract_killstreak(killstreak, 5, 1, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc,
-                               player_stream=player_stream)
+            if not player_stream:
+                # if player_stream == False extract only P11
+                stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, 11)
+                stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
+                match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
 
-    # # detect 4-Killstreaks
-    # if os.path.exists(killstreak_dest_video_path + '/4/' + player_stream + 'metadata.json'):
-    #     if debug:
-    #         logger.info("4-Killstreaks for match " + str(
-    #             i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/4/metadata.json to redetect killstreaks')
-    # elif 4 in sorted_kill_streak_list:
-    #     for killstreak in sorted_kill_streak_list[4]:
-    #         # determine how many kills where performed
-    #         nth_kill = determine_kills(killstreak, all_rounds_data)
-    #         extract_killstreak(killstreak, 4, nth_kill, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc,
-    #                            player_stream=player_stream)
-    #
+                extract_killstreak(killstreak, 5, 1, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc,
+                                   'P11')
+            else:
+                player_id = killstreak[0]['data']['actor']['playerId']
+                if player_id in player_id_to_name_map_match_11:
+                    player_number = player_id_to_name_map_match_11[player_id]
+                    stream_name = 'P' + player_number
+
+                    stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, player_number)
+                    stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                    stream_begin_sec = util.timestamp_to_sec(
+                        stream_begin_timestamp)  # start position in video in seconds
+                    match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
+
+                    extract_killstreak(killstreak, 5, 1, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc,
+                                       stream_name)
+
+    # detect 4-Killstreaks
+    if os.path.exists(killstreak_dest_video_path + '/4/metadata.json'):
+        if debug:
+            logger.info("4-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/4/metadata.json to redetect killstreaks')
+    elif 4 in sorted_kill_streak_list:
+        for killstreak in sorted_kill_streak_list[4]:
+            # determine how many kills where performed
+            nth_kill = determine_kills(killstreak, all_rounds_data)
+            if not player_stream:
+                # if player_stream == False extract only P11
+                stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, 11)
+                stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
+                match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
+
+                extract_killstreak(killstreak, 4, nth_kill, stream_begin_row, stream_begin_sec,
+                                   match_begin_timestamp_utc, 'P11')
+            else:
+                player_id = killstreak[0]['data']['actor']['playerId']
+                if player_id in player_id_to_name_map_match_11:
+                    player_number = player_id_to_name_map_match_11[player_id]
+                    stream_name = 'P' + player_number
+
+                    stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, player_number)
+                    stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                    stream_begin_sec = util.timestamp_to_sec(
+                        stream_begin_timestamp)  # start position in video in seconds
+                    match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
+
+                    extract_killstreak(killstreak, 4, nth_kill, stream_begin_row, stream_begin_sec,
+                                       match_begin_timestamp_utc,
+                                       stream_name)
+
     # # detect 3-Killstreaks
-    # if os.path.exists(killstreak_dest_video_path + '/3/' + player_stream + 'metadata.json'):
-    #     if debug:
-    #         logger.info("3-Killstreaks for match " + str(
-    #             i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/3/metadata.json to redetect killstreaks')
-    # elif 3 in sorted_kill_streak_list:
-    #     for killstreak in sorted_kill_streak_list[4]:
-    #         # determine how many kills where performed
-    #         nth_kill = determine_kills(killstreak, all_rounds_data)
-    #         extract_killstreak(killstreak, 3, nth_kill, stream_begin_row, stream_begin_sec, match_begin_timestamp_utc,
-    #                            player_stream=player_stream)
+    if os.path.exists(killstreak_dest_video_path + '/3/metadata.json'):
+        if debug:
+            logger.info("3-Killstreaks for match " + str(
+                i) + " already detected and extracted. Delete " + killstreak_dest_video_path + '/3/metadata.json to redetect killstreaks')
+    elif 3 in sorted_kill_streak_list:
+        for killstreak in sorted_kill_streak_list[3]:
+            # determine how many kills where performed
+            nth_kill = determine_kills(killstreak, all_rounds_data)
+            if not player_stream:
+                # if player_stream == False extract only P11
+                stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, 11)
+                stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                stream_begin_sec = util.timestamp_to_sec(stream_begin_timestamp)  # start position in video in seconds
+                match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
+
+                extract_killstreak(killstreak, 3, nth_kill, stream_begin_row, stream_begin_sec,
+                                   match_begin_timestamp_utc, 'P11')
+            else:
+                player_id = killstreak[0]['data']['actor']['playerId']
+                if player_id in player_id_to_name_map_match_11:
+                    player_number = player_id_to_name_map_match_11[player_id]
+                    stream_name = 'P' + player_number
+
+                    stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, player_number)
+                    stream_begin_timestamp = stream_begin_row[7]  # string timestamp for match_begin
+                    stream_begin_sec = util.timestamp_to_sec(
+                        stream_begin_timestamp)  # start position in video in seconds
+                    match_begin_timestamp_utc = util.get_datetime_from_utc_string(stream_begin_row[8])  # start of match
+
+                    extract_killstreak(killstreak, 3, nth_kill, stream_begin_row, stream_begin_sec,
+                                       match_begin_timestamp_utc,
+                                       stream_name)
 
 
 #########################################################
@@ -216,10 +310,10 @@ if detect_killstreaks:
     round_detector = round_detector.RoundDetector()
     logger.info('Start extracting killstreaks')
     # iterate over all 11 matches from 1.json - 11.json
-    for i in range(1, 12):
+    for i in range(11, 12):
         # 10.json is not correct!
         if i != 10:
-            json_file = open('timelines/' + str(i) + '.json')
+            json_file = open(base_dir + '/timelines/' + str(i) + '.json')
             all_rounds_data = TimelineReader.preprocess(json.load(json_file))
 
             score_map = TimelineReader.get_score_map_for_match(
@@ -229,13 +323,10 @@ if detect_killstreaks:
             sorted_kill_streak_list = TimelineReader.sort_kill_streaks(
                 kill_streak_list)  # Sorted by highest KillStreakLength desc
 
-            stream_begin_row = util.get_match_begin_in_player_stream(i, metadata_csv, 11)
-            stream_begin_row_p8 = util.get_match_begin_in_player_stream(i, metadata_csv, 8)
-
             # extract all 5, 4, 3 killstreaks
-            # extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, stream_begin_row, player_stream='P11')
-
-            extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, stream_begin_row_p8, player_stream='P8')
+            extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=i)  # from P11-Stream
+            extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=i,
+                                    player_stream=True)  # from Player-Streams
 
             # extract all last rounds of match sequences
 

@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+import inspect
 import logging as logger
 import util.detection_utils as util
 
@@ -12,8 +14,8 @@ def binarize(roi):
 # debug = True
 debug = False
 detection_threshold = 5
-
-skully = cv2.imread('images/skull/skull.png', 0)
+base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
+skully = cv2.imread(base_dir + '/images/skull/skull.png', 0)
 
 
 def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, nth_kill=1, player_stream='P11'):
@@ -23,10 +25,10 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
         end_pos_in_video_sec))
 
     if player_stream == 'P11':
-        skull = cv2.imread('images/skull/skull.png', 0)
+        skull = cv2.imread(base_dir + '/images/skull/skull.png', 0)
         norm_threshold = 20
     else:
-        skull = cv2.imread('images/skull/skull_Pn.png', 0)
+        skull = cv2.imread(base_dir + '/images/skull/skull_Pn.png', 0)
         norm_threshold = 30
 
     cap = cv2.VideoCapture(video_path)

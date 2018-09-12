@@ -1,6 +1,10 @@
 import csv
 from datetime import datetime
+import os
+import inspect
 import subprocess
+
+base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1])).replace('\\util', '')
 
 
 def timestamp_to_sec(timestamp):
@@ -22,7 +26,7 @@ def sec_to_timestamp(sec):
 
 def read_metadata_csv():
     metadata = []
-    with open('data/metadata.csv', newline='') as csvfile:
+    with open(base_dir + '/data/metadata.csv', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         line = 0
         for row in reader:
