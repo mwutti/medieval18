@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/test/kill_detector_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/round_detector_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TimelineReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/TimelineReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kill_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/kill_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/killstreak_clipper.py" beforeDir="false" afterPath="$PROJECT_DIR$/killstreak_clipper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/round_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/detection_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/detection_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_summarizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_summarizer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +22,7 @@
     <SUITE FILE_PATH="coverage/medieval_object_detection$xml_to_csv.coverage" NAME="xml_to_csv Coverage Results" MODIFIED="1533133194247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$killstreak_klipper_debug__1_.coverage" NAME="killstreak_klipper_debug (1) Coverage Results" MODIFIED="1536144689283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$TimelineReader.coverage" NAME="TimelineReader Coverage Results" MODIFIED="1536071715842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/medieval_object_detection$video_summarizer.coverage" NAME="video_summarizer Coverage Results" MODIFIED="1536745469191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medieval_object_detection$video_summarizer.coverage" NAME="video_summarizer Coverage Results" MODIFIED="1536748774123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$kill_detector_test.coverage" NAME="kill_detector_test Coverage Results" MODIFIED="1536748183388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$number_classifier.coverage" NAME="number_classifier Coverage Results" MODIFIED="1536312299660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$kill_detector_debug.coverage" NAME="kill_detector_debug Coverage Results" MODIFIED="1536395899308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -60,11 +51,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="214">
-                  <caret line="166" column="35" lean-forward="true" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+                <state relative-caret-position="78">
+                  <caret line="158" column="39" lean-forward="true" selection-start-line="158" selection-start-column="39" selection-end-line="158" selection-end-column="39" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -108,11 +99,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="video_summarizer.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="video_summarizer.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/video_summarizer.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="92" column="53" lean-forward="true" selection-start-line="92" selection-start-column="53" selection-end-line="92" selection-end-column="53" />
+                <state relative-caret-position="220">
+                  <caret line="59" column="16" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -145,14 +136,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="kill_detector.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="kill_detector.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/kill_detector.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+                <state relative-caret-position="119">
+                  <caret line="7" selection-start-line="7" selection-end-line="7" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="files.txt" pinned="false" current-in-tab="true">
+            <entry file="file://D:/gamestory18-data/final/files.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                  <caret line="9" selection-start-line="9" selection-end-line="9" />
                 </state>
               </provider>
             </entry>
@@ -269,11 +269,11 @@
         <option value="$PROJECT_DIR$/test/round_detector_test.py" />
         <option value="$PROJECT_DIR$/round_detector.py" />
         <option value="D:/gamestory18-data/killstreaks/4/metadata.json" />
-        <option value="D:/gamestory18-data/final/files.txt" />
-        <option value="$PROJECT_DIR$/video_summarizer.py" />
         <option value="$PROJECT_DIR$/kill_detector.py" />
         <option value="$PROJECT_DIR$/test/kill_detector_test.py" />
         <option value="$PROJECT_DIR$/killstreak_clipper.py" />
+        <option value="$PROJECT_DIR$/video_summarizer.py" />
+        <option value="D:/gamestory18-data/final/files.txt" />
       </list>
     </option>
   </component>
@@ -359,7 +359,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.killstreak_clipper">
+  <component name="RunManager" selected="Python.video_summarizer">
     <configuration name="csv-metadata" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="medieval-object-detection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -484,9 +484,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.video_summarizer" />
         <item itemvalue="Python.killstreak_clipper" />
         <item itemvalue="Python.kill_detector_test" />
-        <item itemvalue="Python.video_summarizer" />
         <item itemvalue="Python.round_detector_test" />
         <item itemvalue="Python.csv-metadata" />
       </list>
@@ -524,7 +524,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32985553" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36484098" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30738363" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3065371" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12569574" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -890,19 +890,6 @@ classifier.predict(image.reshape(1,-1))</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/gamestory18-data/final/files.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_summarizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="92" column="53" lean-forward="true" selection-start-line="92" selection-start-column="53" selection-end-line="92" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/round_detector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -935,8 +922,8 @@ classifier.predict(image.reshape(1,-1))</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/kill_detector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -955,10 +942,27 @@ classifier.predict(image.reshape(1,-1))</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="166" column="35" lean-forward="true" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+        <state relative-caret-position="78">
+          <caret line="158" column="39" lean-forward="true" selection-start-line="158" selection-start-column="39" selection-end-line="158" selection-end-column="39" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/gamestory18-data/final/files.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_summarizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="59" column="16" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
