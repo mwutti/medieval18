@@ -100,4 +100,4 @@ def summarize_highlights_under_max_duration(max_duration):
         with open(list_file_path_highlights_under_max_duration, 'w') as file:
             [file.write("file " + "'" + line + "'\n") for line in filenames[0]]
 
-summarize()
+# summarize()
