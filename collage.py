@@ -22,6 +22,8 @@ W_dest, H_dest = (1280, 720)
 resize_factor = 0.95
 font_color = (255, 255, 255)
 
+action_label_map = {'3': 'Triple Kill', '4': 'Quad Kill', '5': 'Ace'}
+
 
 def get_map_sorted_by_round():
     result = {}
@@ -132,7 +134,7 @@ def extract_temp_images(src_video_path_left, src_video_path_right, action_label,
         image = write_header_teams(image, 'Fnatic vs FaZe Clan')
         image = write_header_action(image, action_label)
         image = add_description_left(image, 'Event Stream')
-        image = add_description_right(image, 'Actor: ' + actor_name)
+        image = add_description_right(image, "'" + actor_name + "'")
 
         ret1, image_np1 = cap1.read()
         ret2, image_np2 = cap2.read()
@@ -154,7 +156,6 @@ def summarize_video_for_round(round, sorted_by_match_map):
     if os.path.exists(os.path.join(killstreak_path, '3')):
         total_duration_sec = sum([sorted_by_match_map[round][0]['duration'] for round in sorted_by_match_map])
 
-        # test with match 2
         killstreak = sorted_by_match_map[round]
         killstreak_length = killstreak[0]['killstreak_nr']
         actor_name = killstreak[0]['actor_name']
@@ -171,7 +172,9 @@ def summarize_video_for_round(round, sorted_by_match_map):
         src_commentator = killstreak_path + '/' + killstreak_length + '/' + 'P11' + '/' + file_name_commentator
         player_stream = 'P' + killstreak[0]['actor_stream_nr']
         src_player = killstreak_path + '/' + killstreak_length + '/' + player_stream + '/' + file_name_player
-        extract_temp_images(src_commentator, src_player, "Triple Kill, Round 2", actor_name)
+        action_label = action_label_map[str(killstreak_length)] + ' by ' + "'" + actor_name + "'"
+
+        extract_temp_images(src_commentator, src_player, action_label, actor_name)
 
         # extract audio file from stream
         # ffmpeg -i 1.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.mp3
@@ -186,14 +189,48 @@ def summarize_video_for_round(round, sorted_by_match_map):
                 round) + '.mp4')
 
         # cleanup tmp image folder
+        cleanup_tmp_folder()
 
-        for the_file in os.listdir(tmp_image_folder):
-            file_path = os.path.join(tmp_image_folder, the_file)
-            try:
-                if os.path.isfile(file_path):
-                    os.unlink(file_path)
-            except Exception as e:
-                print(e)
+
+def cleanup_tmp_folder():
+    for the_file in os.listdir(tmp_image_folder):
+        file_path = os.path.join(tmp_image_folder, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)
+
+
+def summarize_last_round():
+    with open(os.path.join(killstreak_3_path, 'metadata.json'), 'r') as f:
+        metadata = json.load(f)
+        last_rounds = metadata['last_round']
+
+        src_commentator = ''
+        src_player = ''
+        player_name = ''
+
+        for src_path in last_rounds:
+            player_name = last_rounds[src_path]['actor_name']
+            if 'P11' in src_path:
+                src_commentator = src_path
+            else:
+                src_player = src_path
+
+        extract_temp_images(src_commentator, src_player, 'Fnatic wins the Tournament', actor_name=player_name)
+
+        # extract audio file from stream
+        # ffmpeg -i 1.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.mp3
+        audio_folder = tmp_audio_folder + '/99.mp3'
+        subprocess.call('ffmpeg -i ' + src_commentator + ' -ac 2 -ar 44100 -vn ' + audio_folder, shell=True)
+
+        # ffmpeg -r 60 -f image2 -s 1280x720 -i img%d.png -i audio.wav -vcodec libx264 -crf 25 -b 4M -vpre normal -pix_fmt yuv420p -acodec copy test.mp4
+        subprocess.call(
+            'ffmpeg -r 60 -f image2 -s 1280x720 -i ' + tmp_image_folder + '/%dimg.png -i ' + tmp_audio_folder + '/99.mp3 -vcodec libx264 -crf 25 -pix_fmt yuv420p -acodec copy ' + tmp_video_folder + '/99.mp4')
+
+        # cleanup tmp image folder
+        cleanup_tmp_folder()
 
 
 def summarize_all():
@@ -201,4 +238,5 @@ def summarize_all():
     for round in sorted_by_match_map:
         summarize_video_for_round(round, sorted_by_match_map)
 
-    # Todo last round 99.mp4
+    summarize_last_round()
+

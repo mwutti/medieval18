@@ -26,17 +26,13 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
 
     if player_stream == 'P11':
         skull = cv2.imread(base_dir + '/images/skull/skull.png', 0)
-        norm_threshold = 20
+        norm_threshold = 30
     else:
         skull = cv2.imread(base_dir + '/images/skull/skull_Pn.png', 0)
         norm_threshold = 30
 
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
-    # # todo delete
-    # start_pos_in_video_sec = 7745
-    # end_pos_in_video_sec = 7835
-    # nth_kill = 10
 
     nr_of_frames = 0
 
@@ -95,12 +91,6 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
         # calculate L1 norm with skul.png
         np.sum(abs(np.divide(skull, 255) - roi_normalized))
         l1_norms = [np.sum(abs(np.divide(skull, 255) - roi_normalized)) for roi_normalized in roi_normalized]
-
-        # todo delete
-        # if nr_of_frames == 15:
-        #     cv2.imwrite('images/skull/skull_Pn.png', roi_binarized[9])
-
-        # print("2: " + str(l1_norms[0]))
 
         # reset detection_map if no kills are visible
         if len([norm for norm in l1_norms if norm <= norm_threshold]) == 0:

@@ -8,7 +8,6 @@ import highlight_extractor
 import os
 import inspect
 import util.detection_utils as util
-import video_summarizer
 import collage
 
 # debug = True
@@ -32,9 +31,10 @@ max_killstreak_length_5 = 61
 
 detect_killstreaks = True
 extract_shows = False
+extract_last_rounds = True
 extract_highlights = False
 extract_videos = True
-summarize_video = False
+summarize_video = True
 
 killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}, 'last_round': {}}
 
@@ -197,7 +197,9 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
 
             # Cut the video and store it
             if extract_videos:
-                util.cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_before_sec,
+                start_sec = killstreak_begin_sec - clipping_offset_before_sec
+
+                util.cut_video_within_boundaries(video_full_name, start_sec,
                                                  util.timestamp_to_sec(
                                                      str(killstreak_duration)) + clipping_offset_after_sec[
                                                      killstreak_length],
@@ -338,10 +340,11 @@ def extract_last_round(score_map, all_rounds_data, match, player_stream):
 
     dest_video_name = last_round_dest_video_path + '/last_round_match_' + str(match) + '_' + player_stream + '.mp4'
     duration = 50
+    start_sec = last_kill_second - 30
 
-    add_lastround_to_list(match, dest_video_name, duration, '', last_kill_second, target_round_actor, player_stream)
+    add_lastround_to_list(match, dest_video_name, duration, '', start_sec, target_round_actor, player_stream)
 
-    util.cut_video_within_boundaries(video_full_name, last_kill_second - 30, duration,
+    util.cut_video_within_boundaries(video_full_name, start_sec, duration,
                                      dest_video_name)
 
 
@@ -382,16 +385,17 @@ if detect_killstreaks:
                                     player_stream=True)  # from Player-Streams
 
     # extract last rounds of match
-    json_file = open(base_dir + '/timelines/11.json')
-    all_rounds_data = TimelineReader.preprocess(json.load(json_file))
-    score_map = TimelineReader.get_score_map_for_match(all_rounds_data)
+    if extract_last_rounds:
+        json_file = open(base_dir + '/timelines/11.json')
+        all_rounds_data = TimelineReader.preprocess(json.load(json_file))
+        score_map = TimelineReader.get_score_map_for_match(all_rounds_data)
 
-    # for event stream
-    extract_last_round(score_map, all_rounds_data, 11, 'P11')
+        # for event stream
+        extract_last_round(score_map, all_rounds_data, 11, 'P11')
 
-    #and player stream
-    target_player_stream = 'P' + player_id_to_name_map_match_11[all_rounds_data[len(score_map)]['kill'][-1]['data']['actor']['playerId']]
-    extract_last_round(score_map, all_rounds_data, 11, target_player_stream)
+        #and player stream
+        target_player_stream = 'P' + player_id_to_name_map_match_11[all_rounds_data[len(score_map)]['kill'][-1]['data']['actor']['playerId']]
+        extract_last_round(score_map, all_rounds_data, 11, target_player_stream)
 
     [log_killstreak_to_file(i) for i in range(3, 6)]
 
