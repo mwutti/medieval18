@@ -9,6 +9,7 @@ import os
 import inspect
 import util.detection_utils as util
 import video_summarizer
+import collage
 
 # debug = True
 debug = False
@@ -26,14 +27,16 @@ search_kill_offset_sec_before = 1
 search_kill_offset_sec_after = 10
 clipping_offset_before_sec = 5
 clipping_offset_after_sec = {3: 12, 4: 12, 5: 20}
-# max_killstreak_length = 20
-max_killstreak_length = 61
+max_killstreak_length = 20
+max_killstreak_length_5 = 61
 
 detect_killstreaks = True
 extract_shows = False
 extract_highlights = False
+extract_videos = True
+summarize_video = False
 
-killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}}
+killstreaks = {'killstreaks': {5: {}, 4: {}, 3: {}}, 'last_round': {}}
 
 player_id_to_name_map_match_11 = {'GuardiaN': '1',
                                   'olofmeister': '2',
@@ -58,12 +61,23 @@ def add_killstreak_to_list(nrOfKills, dest_video_name, killstreak_duration_sec, 
     target_killstreak_list[dest_video_name]['round'] = str(round_idx)
     target_killstreak_list[dest_video_name]['round_begin'] = round_begin
     target_killstreak_list[dest_video_name]['killstreak_begin'] = killstreak_begin
-    target_killstreak_list[dest_video_name]['killstreak_begin_sec'] = util.timestamp_to_sec(killstreak_begin)
+    target_killstreak_list[dest_video_name]['killstreak_begin_sec'] = util.timestamp_to_float_sec(killstreak_begin)
     target_killstreak_list[dest_video_name]['estimated_begin'] = estimated_begin
     target_killstreak_list[dest_video_name]['estimated_end'] = estimated_end
     target_killstreak_list[dest_video_name]['actor_name'] = actor_name
     target_killstreak_list[dest_video_name]['actor_stream_nr'] = actor_stream_nr
 
+
+def add_lastround_to_list(match, dest_video_name, duration_sec, round_idx, begin_sec, actor_name, actor_stream):
+    killstreaks['last_round'][dest_video_name] = {}
+    target = killstreaks['last_round'][dest_video_name]
+
+    target['match'] = match
+    target['duration_sec'] = duration_sec
+    target['round_idx'] = round_idx
+    target['begin_sec'] = begin_sec
+    target['actor_name'] = actor_name
+    target['actor_stream'] = actor_stream
 
 def log_killstreak_to_file(nrOfKills):
     if not os.path.exists(killstreak_dest_video_path + '/' + str(nrOfKills) + '/metadata.json'):
@@ -107,7 +121,7 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
     video_full_name = src_video_path + '/' + stream_begin_row[6]
 
     # Only killstreak which are shorter than max_killstreak_length are considered
-    if util.timestamp_to_sec(str(killstreak_duration)) < max_killstreak_length:
+    if util.timestamp_to_sec(str(killstreak_duration)) < max_killstreak_length or ( killstreak_length == 5 and (util.timestamp_to_sec(str(killstreak_duration)) <= max_killstreak_length_5)):
         logger.info('Looking for ' + str(killstreak_length) + '-Killstreak in match ' + str(
             i) + '. Begin of match at ' + util.sec_to_timestamp(stream_begin_sec))
 
@@ -169,9 +183,6 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
         killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec_before,
                                                               end_pos_in_video_sec + search_round_offset_sec + search_kill_offset_sec_after,
                                                               video_full_name, nth_kill, player_stream=player_stream)
-        # killstreak_begin_sec = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec_before,
-        #                                                       round_begin_sec + 120 + search_kill_offset_sec_after,
-        #                                                       video_full_name, nth_kill, player_stream=player_stream)
 
         if killstreak_begin_sec is None:
             logger.error('Unable to detect killstreak begin, skip this killstreak')
@@ -185,12 +196,13 @@ def extract_killstreak(killstreak, killstreak_length, nth_kill, stream_begin_row
                                    player_id_to_name_map_match_11[player_name])
 
             # Cut the video and store it
-            util.cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_before_sec,
-                                             util.timestamp_to_sec(
-                                                 str(killstreak_duration)) + clipping_offset_after_sec[
-                                                 killstreak_length],
-                                             killstreak_dest_video_path + '/' + str(
-                                                 killstreak_length) + '/' + player_stream + '/' + dest_video_name)
+            if extract_videos:
+                util.cut_video_within_boundaries(video_full_name, killstreak_begin_sec - clipping_offset_before_sec,
+                                                 util.timestamp_to_sec(
+                                                     str(killstreak_duration)) + clipping_offset_after_sec[
+                                                     killstreak_length],
+                                                 killstreak_dest_video_path + '/' + str(
+                                                     killstreak_length) + '/' + player_stream + '/' + dest_video_name)
 
     else:
         logger.info("Killstreak duration in match " + str(i) + ": " + str(
@@ -267,7 +279,7 @@ def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=1, p
                                        match_begin_timestamp_utc,
                                        stream_name)
 
-    # # detect 3-Killstreaks
+    # detect 3-Killstreaks
     if os.path.exists(killstreak_dest_video_path + '/3/metadata.json'):
         if debug:
             logger.info("3-Killstreaks for match " + str(
@@ -302,27 +314,10 @@ def extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=1, p
                                        stream_name)
 
 
-#########################################################
-
-
-# create dest. video folders if not exists
-for j in range(3, 6):
-    for k in range(1, 12):
-        if not os.path.exists(killstreak_dest_video_path + '/' + str(j) + '/P' + str(k)):
-            os.makedirs(killstreak_dest_video_path + '/' + str(j) + '/P' + str(k))
-
-if not os.path.exists(last_round_dest_video_path):
-    os.makedirs(last_round_dest_video_path)
-
-print(kill_detector.skully)
-#
-metadata_csv = util.read_metadata_csv()
-
-
 def extract_last_round(score_map, all_rounds_data, match, player_stream):
     last_score_list = [score_map[len(score_map) - 2][entry]['score'] for entry in score_map[len(score_map) - 2]]
     target_round_data = all_rounds_data[len(score_map)]
-    target_round_actor = all_rounds_data[len(score_map)]['kill'][-1]['data']['actor']['playerId']
+    target_round_actor = target_round_data['kill'][-1]['data']['actor']['playerId']
 
     stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv, int(player_stream.replace('P', '')))
     match_begin_sec = int(stream_begin_row[1])
@@ -335,16 +330,34 @@ def extract_last_round(score_map, all_rounds_data, match, player_stream):
                                                      round_potential_end_sec,
                                                      video_full_name,
                                                      last_score_list[0], last_score_list[1], player_stream=player_stream)
-    nth_kill = len(all_rounds_data[len(score_map)]['kill']) - 1
+    nth_kill = len(target_round_data['kill']) - 1
 
     last_kill_second = kill_detector.get_nth_kill_sec(round_begin_sec + search_kill_offset_sec_before,
                                                     round_begin_sec + 200,
                                                     video_full_name, nth_kill, player_stream=player_stream)
 
-    util.cut_video_within_boundaries(video_full_name, last_kill_second - 30, 50,
-                                     last_round_dest_video_path + '/last_round_match_' + str(match) + '_' + player_stream + '.mp4')
+    dest_video_name = last_round_dest_video_path + '/last_round_match_' + str(match) + '_' + player_stream + '.mp4'
+    duration = 50
+
+    add_lastround_to_list(match, dest_video_name, duration, '', last_kill_second, target_round_actor, player_stream)
+
+    util.cut_video_within_boundaries(video_full_name, last_kill_second - 30, duration,
+                                     dest_video_name)
 
 
+#########################################################
+# create dest. video folders if not exists
+for j in range(3, 6):
+    for k in range(1, 12):
+        if not os.path.exists(killstreak_dest_video_path + '/' + str(j) + '/P' + str(k)):
+            os.makedirs(killstreak_dest_video_path + '/' + str(j) + '/P' + str(k))
+
+if not os.path.exists(last_round_dest_video_path):
+    os.makedirs(last_round_dest_video_path)
+
+print(kill_detector.skully)
+#
+metadata_csv = util.read_metadata_csv()
 
 if detect_killstreaks:
     round_detector = round_detector.RoundDetector()
@@ -368,10 +381,17 @@ if detect_killstreaks:
             extract_all_killstreaks(all_rounds_data, sorted_kill_streak_list, match=i,
                                     player_stream=True)  # from Player-Streams
 
-            # extract all last rounds of matches
-            extract_last_round(score_map, all_rounds_data, i, 'P11')
-            target_player_stream = 'P' + player_id_to_name_map_match_11[all_rounds_data[len(score_map)]['kill'][-1]['data']['actor']['playerId']]
-            extract_last_round(score_map, all_rounds_data, i, target_player_stream)
+    # extract last rounds of match
+    json_file = open(base_dir + '/timelines/11.json')
+    all_rounds_data = TimelineReader.preprocess(json.load(json_file))
+    score_map = TimelineReader.get_score_map_for_match(all_rounds_data)
+
+    # for event stream
+    extract_last_round(score_map, all_rounds_data, 11, 'P11')
+
+    #and player stream
+    target_player_stream = 'P' + player_id_to_name_map_match_11[all_rounds_data[len(score_map)]['kill'][-1]['data']['actor']['playerId']]
+    extract_last_round(score_map, all_rounds_data, 11, target_player_stream)
 
     [log_killstreak_to_file(i) for i in range(3, 6)]
 
@@ -383,5 +403,5 @@ if extract_highlights:
     logger.info('Start extracting highlights')
     highlight_extractor.extract_highlights(metadata_csv, src_video_path, highlight_dest_video_path)
 
-video_summarizer.summarize_highlights_under_max_duration(20)
-score_map[34]
+if summarize_video:
+    collage.summarize_all()

@@ -14,6 +14,11 @@ def timestamp_to_sec(timestamp):
     return stream_timestamp_sec
 
 
+def timestamp_to_float_sec(timestamp):
+    split_timestamp = timestamp.split(':')
+    return float(split_timestamp[0]) * 3600  + float(split_timestamp[1]) * 60 + float(split_timestamp[2])
+
+
 def sec_to_timestamp(sec):
     seconds = sec % 60
     minutes = sec // 60
@@ -54,7 +59,7 @@ def get_match_begin_in_player_stream(matchnr, metadata, player_id):
 
 def cut_video_within_boundaries(src_path_to_video, begin_sec, duration_sec, dest_video_name):
     subprocess.call(
-        ['ffmpeg', '-loglevel', 'warning', '-ss', str(begin_sec), '-i', src_path_to_video, '-t', str(duration_sec), dest_video_name])
+        ['ffmpeg', '-loglevel', 'warning', '-ss', str(begin_sec - 30), '-i', src_path_to_video, '-ss', '30', '-t', str(duration_sec), dest_video_name])
 
 
 # def cut_video_within_boundaries_slow(src_path_to_video, begin_sec, duration_sec, dest_video_name):

@@ -50,7 +50,7 @@ def get_nth_kill_sec(start_pos_in_video_sec, end_pos_in_video_sec, video_path, n
 
     while current_frame <= frame_pos_end:
         ret, image_np = cap.read()
-        current_sec = int(cap.get(cv2.CAP_PROP_POS_MSEC) / 1000)
+        current_sec = cap.get(cv2.CAP_PROP_POS_MSEC) / 1000
 
         current_frame += 1
         nr_of_frames += 1
