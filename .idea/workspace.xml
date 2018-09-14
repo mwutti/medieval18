@@ -4,9 +4,6 @@
     <list default="true" id="3637d7ba-33cb-4668-bc0c-aa75da276019" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kill_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/kill_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/killstreak_clipper.py" beforeDir="false" afterPath="$PROJECT_DIR$/killstreak_clipper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/kill_detector_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/kill_detector_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +17,8 @@
     <SUITE FILE_PATH="coverage/medieval_object_detection$highlight_extractor.coverage" NAME="highlight_extractor Coverage Results" MODIFIED="1536566169847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$trophy_detector.coverage" NAME="trophy_detector Coverage Results" MODIFIED="1533481338572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$prepare_dataset.coverage" NAME="prepare_dataset Coverage Results" MODIFIED="1536159935047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
-    <SUITE FILE_PATH="coverage/medieval_object_detection$collage.coverage" NAME="collage Coverage Results" MODIFIED="1536917795137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/medieval_object_detection$killstreak_clipper.coverage" NAME="killstreak_clipper Coverage Results" MODIFIED="1536917744733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medieval_object_detection$collage.coverage" NAME="collage Coverage Results" MODIFIED="1536930927737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medieval_object_detection$killstreak_clipper.coverage" NAME="killstreak_clipper Coverage Results" MODIFIED="1536925913795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$generate_tfrecord.coverage" NAME="generate_tfrecord Coverage Results" MODIFIED="1533133817575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$round_detector_test.coverage" NAME="round_detector_test Coverage Results" MODIFIED="1536743982506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$xml_to_csv.coverage" NAME="xml_to_csv Coverage Results" MODIFIED="1533133194247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -32,6 +29,7 @@
     <SUITE FILE_PATH="coverage/medieval_object_detection$number_classifier.coverage" NAME="number_classifier Coverage Results" MODIFIED="1536312299660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$kill_detector_debug.coverage" NAME="kill_detector_debug Coverage Results" MODIFIED="1536395899308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$killstreak_klipper_debug.coverage" NAME="killstreak_klipper_debug Coverage Results" MODIFIED="1536134758335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/todelete" />
+    <SUITE FILE_PATH="coverage/medieval_object_detection$collage_v2.coverage" NAME="collage_v2 Coverage Results" MODIFIED="1536934258378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$kill_detector.coverage" NAME="kill_detector Coverage Results" MODIFIED="1536858816039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$show_extractor.coverage" NAME="show_extractor Coverage Results" MODIFIED="1536486825596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medieval_object_detection$csv_metadata.coverage" NAME="csv-metadata Coverage Results" MODIFIED="1536665953315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -92,11 +90,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="killstreak_clipper.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="632">
-                  <caret line="342" column="37" lean-forward="true" selection-start-line="342" selection-start-column="37" selection-end-line="342" selection-end-column="37" />
+                <state relative-caret-position="-1024">
+                  <caret line="294" column="47" lean-forward="true" selection-start-line="294" selection-start-column="47" selection-end-line="294" selection-end-column="47" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -116,8 +114,20 @@
           <file leaf-file-name="collage.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/collage.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3859">
-                  <caret line="235" column="4" selection-start-line="235" selection-start-column="4" selection-end-line="235" selection-end-column="4" />
+                <state relative-caret-position="438">
+                  <caret line="255" column="20" lean-forward="true" selection-end-line="264" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="collage_v2.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/collage_v2.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="326">
+                  <caret line="251" column="56" selection-start-line="251" selection-start-column="56" selection-end-line="251" selection-end-column="56" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -154,7 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>extract_all_killstreaks</find>
       <find>8</find>
       <find>player_id_to_name_map</find>
       <find>norm_threshold</find>
@@ -164,14 +173,14 @@
       <find>realpath</find>
       <find>search_round_offset_sec</find>
       <find>extract_killstreak</find>
-      <find>Unable to detect killstreak begin</find>
+      <find />
       <find>24</find>
       <find>2</find>
-      <find>&quot;round&quot;: &quot;2&quot;,</find>
-      <find>&quot;round&quot;: &quot;3&quot;,</find>
-      <find>&quot;round&quot;: &quot;10&quot;,</find>
-      <find>&quot;round&quot;: &quot;17&quot;,</find>
-      <find>Killstreak duration</find>
+      <find />
+      <find />
+      <find />
+      <find />
+      <find />
       <find>search_kill_offset_sec_before</find>
       <find>add_killstreak_to_list</find>
       <find>resize</find>
@@ -184,6 +193,7 @@
       <find>last_round</find>
       <find>asd</find>
       <find>by</find>
+      <find>debug</find>
     </findStrings>
     <replaceStrings>
       <replace>loser</replace>
@@ -195,7 +205,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/training/pipeline.config" />
         <option value="$PROJECT_DIR$/trophy_detection_image.py" />
         <option value="$PROJECT_DIR$/trophy_detection_video.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -242,10 +251,11 @@
         <option value="$PROJECT_DIR$/util/detection_utils.py" />
         <option value="$PROJECT_DIR$/data/metadata.csv" />
         <option value="D:/gamestory18-data/killstreaks/3/metadata.json" />
-        <option value="$PROJECT_DIR$/collage.py" />
         <option value="$PROJECT_DIR$/test/kill_detector_test.py" />
         <option value="$PROJECT_DIR$/kill_detector.py" />
         <option value="$PROJECT_DIR$/killstreak_clipper.py" />
+        <option value="$PROJECT_DIR$/collage.py" />
+        <option value="$PROJECT_DIR$/collage_v2.py" />
       </list>
     </option>
   </component>
@@ -259,9 +269,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="16" />
-    <option name="y" value="201" />
-    <option name="width" value="3866" />
+    <option name="x" value="13" />
+    <option name="y" value="55" />
+    <option name="width" value="3860" />
     <option name="height" value="1778" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -281,78 +291,7 @@
             </path>
             <path>
               <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medieval-object-detection" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medieval-object-detection" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medieval-object-detection" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="-1338551072" type="70582d5e:PySkeletonsNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="-1338551072" type="70582d5e:PySkeletonsNode" />
-              <item name="cv2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="-1338551072" type="70582d5e:PySkeletonsNode" />
-              <item name="cv2" type="462c0819:PsiDirectoryNode" />
-              <item name="cv2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="svm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="svm" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="svm" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medieval-object-detection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (medieval-object-detection) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="svm" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="PIL" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -394,7 +333,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.kill_detector_test">
+  <component name="RunManager" selected="Python.collage_v2">
     <configuration name="collage" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="medieval-object-detection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -409,6 +348,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="collage_v2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="medieval-object-detection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collage_v2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -490,40 +448,21 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="video_summarizer" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="medieval-object-detection" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/video_summarizer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <list>
       <item itemvalue="Python.svm_test" />
       <item itemvalue="Python.killstreak_clipper" />
-      <item itemvalue="Python.video_summarizer" />
       <item itemvalue="Python.kill_detector_test" />
       <item itemvalue="Python.collage" />
       <item itemvalue="Python.kill_detector" />
+      <item itemvalue="Python.collage_v2" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.kill_detector_test" />
+        <item itemvalue="Python.collage_v2" />
         <item itemvalue="Python.collage" />
         <item itemvalue="Python.killstreak_clipper" />
+        <item itemvalue="Python.kill_detector_test" />
         <item itemvalue="Python.kill_detector" />
-        <item itemvalue="Python.video_summarizer" />
       </list>
     </recent_temporary>
   </component>
@@ -550,23 +489,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="11" y="134" width="2577" height="1185" extended-state="0" />
-    <editor active="true" />
+    <frame x="9" y="37" width="2573" height="1185" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32985553" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3295053" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29815102" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3054873" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.111243546" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29727095" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30506822" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11142062" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.24876848" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32186732" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32163742" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -615,6 +553,16 @@
           <line>5</line>
           <option name="timeStamp" value="225" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/collage.py</url>
+          <line>238</line>
+          <option name="timeStamp" value="228" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/collage.py</url>
+          <line>252</line>
+          <option name="timeStamp" value="229" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -623,7 +571,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="226" />
+      <option name="time" value="231" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -634,7 +582,7 @@
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>str(__file__).replace(&quot;number_classifier.py&quot;, &quot;&quot;)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -649,33 +597,42 @@
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>classifier.predict(cv2.imread(dest_path + '/2/2.png', 0).reshape(1,-1))</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>classifier.predict(cv2.imread(dest_path + '/2/2.png', 0).reshape(1,-1).astype(np.float64))</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>image = cv2.imread(dest_path + '/2/2.png', 0)
-classifier.predict(image.reshape(1,-1))</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>image = cv2.imread(dest_path + '/2/2.png', 0)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>cv2.imread(dest_path + '/2/2.png', 0)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string />
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string />
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>util.sec_to_timestamp(start_pos_in_video_sec)</expression-string>
         <language-id>Python</language-id>
@@ -697,7 +654,7 @@ classifier.predict(image.reshape(1,-1))</expression-string>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>float(split_timestamp[0]) * 3600  + float(split_timestamp[1]) * 60 + float(split_timestamp[2])</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -716,21 +673,9 @@ classifier.predict(image.reshape(1,-1))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>split_timestamp</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/timelines/9.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405528">
-          <caret line="116" column="25" selection-start-line="116" selection-start-column="25" selection-end-line="116" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/timelines/8.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-879641">
@@ -974,22 +919,22 @@ classifier.predict(image.reshape(1,-1))</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3859">
-          <caret line="235" column="4" selection-start-line="235" selection-start-column="4" selection-end-line="235" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/kill_detector_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1024">
+          <caret line="294" column="47" lean-forward="true" selection-start-line="294" selection-start-column="47" selection-end-line="294" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1004,12 +949,22 @@ classifier.predict(image.reshape(1,-1))</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/killstreak_clipper.py">
+    <entry file="file://$PROJECT_DIR$/collage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="342" column="37" lean-forward="true" selection-start-line="342" selection-start-column="37" selection-end-line="342" selection-end-column="37" />
+        <state relative-caret-position="438">
+          <caret line="255" column="20" lean-forward="true" selection-end-line="264" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="251" column="56" selection-start-line="251" selection-start-column="56" selection-end-line="251" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

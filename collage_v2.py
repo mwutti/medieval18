@@ -78,7 +78,7 @@ def add_description_left(image, txt):
     draw = ImageDraw.Draw(image)
     w, h = draw.textsize(txt, font=font)
 
-    draw.text(((W_dest - w) // 4 - 30, 540), txt, fill=font_color, font=font)
+    draw.text(((W_dest - w) // 4 - 65, 385), txt, fill=font_color, font=font)
     return image
 
 
@@ -89,20 +89,20 @@ def add_description_right(image, txt):
     draw = ImageDraw.Draw(image)
     w, h = draw.textsize(txt, font=font)
 
-    draw.text(((W_dest - w) // 4 * 3 + 30, 540), txt, fill=font_color, font=font)
+    draw.text(((W_dest - w) // 4 * 3 - 80, 635), txt, fill=font_color, font=font)
     return image
 
 
 def add_image_left(image, image_left):
-    w_before, h_before = image_left.shape[1], image_left.shape[0]
-    w_src, h_src = (int(image_left.shape[1] * resize_factor), int(image_left.shape[0] * resize_factor))
+    resize_factor_left = 0.5
+    w_src, h_src = (int(image_left.shape[1] * resize_factor_left), int(image_left.shape[0] * resize_factor_left))
 
     image_left = cv2.resize(image_left, dsize=(w_src, h_src), interpolation=cv2.INTER_CUBIC)
 
-    height_begin = (H_dest - h_src) // 2
+    height_begin = 200
     height_end = height_begin + h_src
 
-    width_begin = (w_before - w_src) // 2
+    width_begin = 130
     width_end = width_begin + w_src
 
     image[height_begin:height_end, width_begin:width_end] = image_left
@@ -110,15 +110,14 @@ def add_image_left(image, image_left):
 
 
 def add_image_right(image, image_right):
-    w_before, h_before = image_right.shape[1], image_right.shape[0]
     w_src, h_src = (int(image_right.shape[1] * resize_factor), int(image_right.shape[0] * resize_factor))
 
     image_right = cv2.resize(image_right, dsize=(w_src, h_src), interpolation=cv2.INTER_CUBIC)
 
-    height_begin = (H_dest - h_src) // 2
+    height_begin = (H_dest - h_src) // 2 + 100
     height_end = height_begin + h_src
 
-    width_begin = (W_dest // 2) + (w_before - w_src) // 2
+    width_begin = (W_dest - w_src) // 2 + 200
     width_end = width_begin + w_src
 
     image[height_begin:height_end, width_begin:width_end] = image_right
@@ -134,8 +133,8 @@ def extract_temp_images(src_video_path_left, src_video_path_right, action_label,
         image = Image.new('RGB', (W_dest, H_dest))
         image = write_header_teams(image, 'Fnatic vs FaZe Clan')
         image = write_header_action(image, action_label)
-        image = add_description_left(image, 'Event Stream')
-        image = add_description_right(image, "'" + actor_name + "'")
+        image = add_description_left(image, 'Player View')
+        image = add_description_right(image, "Event Stream")
 
         ret1, image_np1 = cap1.read()
         ret2, image_np2 = cap2.read()
@@ -145,8 +144,8 @@ def extract_temp_images(src_video_path_left, src_video_path_right, action_label,
 
         image = np.array(image)
 
-        image = add_image_left(image, image_np1)
-        image = add_image_right(image, image_np2)
+        image = add_image_left(image, image_np2)
+        image = add_image_right(image, image_np1)
 
         cv2.imwrite(tmp_image_folder + '/' + str(i) + 'img.png', image)
 
