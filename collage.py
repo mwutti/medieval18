@@ -260,5 +260,3 @@ def summarize_all():
 
     summarize_last_round()
 
-summarize_all()
-
