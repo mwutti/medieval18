@@ -406,39 +406,39 @@ def summarize_video_for_round(round, sorted_by_match_map):
                                 victim_base_base + killstreak[5]['file_name'].split('.')[0].split('_')[-1] + '/' + killstreak[5]['file_name'],
                                 victim_base_base + killstreak[6]['file_name'].split('.')[0].split('_')[-1] + '/' + killstreak[6]['file_name'], action_label=action_label)
 
-        # if killstreak_length == '4':
-        #     extract_temp_images(src_commentator, src_player,
-        #                         victim_base_base + killstreak[2]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[2]['file_name'],
-        #                         victim_base_base + killstreak[3]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[3]['file_name'],
-        #                         victim_base_base + killstreak[4]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[4]['file_name'],
-        #                         victim_base_base + killstreak[5]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[5]['file_name'], action_label=action_label)
-        # if killstreak_length == '3':
-        #     extract_temp_images(src_commentator, src_player,
-        #                         victim_base_base + killstreak[2]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[2]['file_name'],
-        #                         victim_base_base + killstreak[3]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[3]['file_name'],
-        #                         victim_base_base + killstreak[4]['file_name'].split('.')[0].split('_')[-1] + '/' +
-        #                         killstreak[4]['file_name'], action_label=action_label)
-        #
-        # # extract audio file from stream
-        # # ffmpeg -i 1.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.mp3
-        # audio_folder = tmp_audio_folder + '/' + str(round) + '.mp3'
-        # subprocess.call('ffmpeg -i ' + src_commentator + ' -ac 2 -ar 44100 -vn ' + audio_folder, shell=True)
-        #
-        # # merge tmp images together
-        # # ffmpeg -r 60 -f image2 -s 1280x720 -i img%d.png -i audio.wav -vcodec libx264 -crf 25 -b 4M -vpre normal -pix_fmt yuv420p -acodec copy test.mp4
-        # subprocess.call(
-        #     'ffmpeg -r 60 -f image2 -s 1280x720 -i ' + tmp_image_folder + '/%dimg.png -i ' + tmp_audio_folder + '/' + str(
-        #         round) + '.mp3 -vcodec libx264 -crf 25 -pix_fmt yuv420p -acodec copy ' + tmp_video_folder + '/' + str(
-        #         round) + '.mp4')
-        #
-        # # cleanup tmp image folder
-        # cleanup_tmp_folder()
+        if killstreak_length == '4':
+            extract_temp_images(src_commentator, src_player,
+                                victim_base_base + killstreak[2]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[2]['file_name'],
+                                victim_base_base + killstreak[3]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[3]['file_name'],
+                                victim_base_base + killstreak[4]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[4]['file_name'],
+                                victim_base_base + killstreak[5]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[5]['file_name'], action_label=action_label)
+        if killstreak_length == '3':
+            extract_temp_images(src_commentator, src_player,
+                                victim_base_base + killstreak[2]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[2]['file_name'],
+                                victim_base_base + killstreak[3]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[3]['file_name'],
+                                victim_base_base + killstreak[4]['file_name'].split('.')[0].split('_')[-1] + '/' +
+                                killstreak[4]['file_name'], action_label=action_label)
+
+        # extract audio file from stream
+        # ffmpeg -i 1.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.mp3
+        audio_folder = tmp_audio_folder + '/' + str(round) + '.mp3'
+        subprocess.call('ffmpeg -i ' + src_commentator + ' -ac 2 -ar 44100 -vn ' + audio_folder, shell=True)
+
+        # merge tmp images together
+        # ffmpeg -r 60 -f image2 -s 1280x720 -i img%d.png -i audio.wav -vcodec libx264 -crf 25 -b 4M -vpre normal -pix_fmt yuv420p -acodec copy test.mp4
+        subprocess.call(
+            'ffmpeg -r 60 -f image2 -s 1280x720 -i ' + tmp_image_folder + '/%dimg.png -i ' + tmp_audio_folder + '/' + str(
+                round) + '.mp3 -vcodec libx264 -crf 25 -pix_fmt yuv420p -acodec copy ' + tmp_video_folder + '/' + str(
+                round) + '.mp4')
+
+        # cleanup tmp image folder
+        cleanup_tmp_folder()
 
 
 def cleanup_tmp_folder():
@@ -449,37 +449,6 @@ def cleanup_tmp_folder():
                 os.unlink(file_path)
         except Exception as e:
             print(e)
-
-
-# def summarize_last_round():
-#     with open(os.path.join(killstreak_3_path, 'metadata.json'), 'r') as f:
-#         metadata = json.load(f)
-#         last_rounds = metadata['last_round']
-#
-#         src_commentator = ''
-#         src_player = ''
-#         player_name = ''
-#
-#         for src_path in last_rounds:
-#             player_name = last_rounds[src_path]['actor_name']
-#             if 'P11' in src_path:
-#                 src_commentator = src_path
-#             else:
-#                 src_player = src_path
-#
-#         extract_temp_images(src_commentator, src_player, 'Fnatic wins the Tournament', actor_name=player_name)
-#
-#         # extract audio file from stream
-#         # ffmpeg -i 1.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.mp3
-#         audio_folder = tmp_audio_folder + '/99.mp3'
-#         subprocess.call('ffmpeg -i ' + src_commentator + ' -ac 2 -ar 44100 -vn ' + audio_folder, shell=True)
-#
-#         # ffmpeg -r 60 -f image2 -s 1280x720 -i img%d.png -i audio.wav -vcodec libx264 -crf 25 -b 4M -vpre normal -pix_fmt yuv420p -acodec copy test.mp4
-#         subprocess.call(
-#             'ffmpeg -r 60 -f image2 -s 1280x720 -i ' + tmp_image_folder + '/%dimg.png -i ' + tmp_audio_folder + '/99.mp3 -vcodec libx264 -crf 25 -pix_fmt yuv420p -acodec copy ' + tmp_video_folder + '/99.mp4')
-#
-#         # cleanup tmp image folder
-#         cleanup_tmp_folder()
 
 
 def concat_videos():
