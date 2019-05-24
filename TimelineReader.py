@@ -4,6 +4,7 @@ import inspect
 
 base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
 
+
 # Preprocessing of json data
 def preprocess(data):
     result = {}
@@ -46,16 +47,16 @@ def get_score_map_for_match(all_rounds_data):
 
         # first round... initialize context
         if i == 1:
-            team_id_a = teams_for_round[0]['id'] #  TODO overtime comment
+            team_id_a = teams_for_round[0]['id']  # TODO overtime comment
             teams_ids.append(team_id_a)
             ingame_team_a = teams_for_round[0]['ingameTeam']
             result[i - 1][team_id_a] = {'score': 0, 'ingameTeam': ingame_team_a}
 
-            team_id_b = teams_for_round[1]['id'] #  TODO overtime comment
+            team_id_b = teams_for_round[1]['id']  # TODO overtime comment
             teams_ids.append(team_id_b)
             ingame_team_b = teams_for_round[1]['ingameTeam']
-            result[i -1][team_id_b] = {'score': 0, 'ingameTeam': ingame_team_b}
-        else:   #scores must be copied from last round
+            result[i - 1][team_id_b] = {'score': 0, 'ingameTeam': ingame_team_b}
+        else:  # scores must be copied from last round
             result[i - 1][team_id_a] = {'score': result[i - 2][team_id_a]['score']}
             result[i - 1][team_id_b] = {'score': result[i - 2][team_id_b]['score']}
 
@@ -65,20 +66,21 @@ def get_score_map_for_match(all_rounds_data):
 
         result[i - 1][round_winner_id]['score'] += 1
         result[i - 1][round_winner_id]['ingameTeam'] = round_winner_ingame_team
-        
+
         if teams_ids[0] == round_winner_id:
             round_loser_id = teams_ids[1]
         else:
             round_loser_id = teams_ids[0]
-            
+
         if round_winner_ingame_team == 'CT':
             round_loser_ingame_team = 'TERRORIST'
         else:
             round_loser_ingame_team = 'CT'
 
         result[i - 1][round_loser_id]['ingameTeam'] = round_loser_ingame_team
-        
+
     return result
+
 
 def sort_kill_streaks(kill_streak_list):
     result = {}
@@ -102,3 +104,19 @@ for i in range(1, 12):
     # write json file
     with open(base_dir + '/data/killstreaks/killstreaks_' + str(i) + '.json', 'w') as file:
         json.dump(sorted_kill_streak_list, file)
+
+
+# TODO delete script for obtaining unique event types
+# def get_unique_events(json_file, result):
+#     for event in json_file:
+#         if event['type'] not in result:
+#             result[event['type']] = event
+#     return result
+#
+#
+# result = {}
+# for i in range(1, 12):
+#     json_file = open(base_dir + '/timelines/' + str(i) + '.json')
+#     unique_events = get_unique_events(json.load(json_file), result)
+#
+# print

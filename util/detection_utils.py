@@ -64,3 +64,6 @@ def cut_video_within_boundaries(src_path_to_video, begin_sec, duration_sec, dest
 
 # def cut_video_within_boundaries_slow(src_path_to_video, begin_sec, duration_sec, dest_video_name):
 #     subprocess.call(['ffmpeg', '-i', src_path_to_video, '-ss', str(begin_sec), '-t', str(duration_sec), dest_video_name])
+
+metadata_csv = read_metadata_csv()
+print
