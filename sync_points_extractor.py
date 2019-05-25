@@ -10,11 +10,11 @@ base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
 src_video_path = 'D:/gamestory18-data/train_set'
 output_dir = "synch-points/"
 
-player_stream = 'P11'
-# match_start = 1
-match_start = 2
-match_end = 2
-# match_end = 11
+player_stream = 'P4'
+match_start = 1
+# match_start = 2
+# match_end = 2
+match_end = 11
 
 metadata_csv = util.read_metadata_csv()
 round_detector = round_detector.RoundDetector()
