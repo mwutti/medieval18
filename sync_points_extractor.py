@@ -6,18 +6,66 @@ import csv
 import json
 import inspect
 
+# Comment/uncomment lines to switch between training and test set
 base_dir = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
-src_video_path = 'D:/gamestory18-data/train_set'
-output_dir = "synch-points/"
+# src_video_path = 'D:/gamestory18-data/train_set'
+src_video_path = 'D:/gamestory18-data/test_set'
+# output_dir = "synch-points/"
+output_dir = "synch-points/test-set/"
+# timelines_dir = base_dir + '/timelines/'
+timelines_dir = base_dir + '/timelines/test/'
 
-player_stream = 'P11'
+player_stream = 'P1'
 match_start = 1
-# match_start = 2
-# match_end = 2
-match_end = 11
+# match_start = 3
+# match_end = 3
+match_end = 4
 
-metadata_csv = util.read_metadata_csv()
+# metadata_csv = util.read_metadata_csv()
+metadata_csv = util.read_metadata_test_set_csv()
 round_detector = round_detector.RoundDetector()
+
+
+def prepare_testset_csv():
+    metadata_columns = ["id", "start_time", "duration", "type", "match_id", "perspective", "stream_file",
+                        "stream_timestamp", "UTC_timestamp"]
+    metadata = []
+    match_id = 0
+
+    for i in range(1, 5):
+        json_file = open(base_dir + '/timelines/test/' + str(i) + '.json')
+        all_rounds_data = TimelineReader.preprocess(json.load(json_file))
+        match_start_utc = all_rounds_data[1]['round_start'][0]['date']
+        match_end_utc = match_start_utc
+
+        for round in all_rounds_data:
+            match_end_utc = all_rounds_data[round]['round_end'][0]['date']
+        match_start_datetime = util.get_datetime_from_utc_string(match_start_utc)
+        match_end_datetime = util.get_datetime_from_utc_string(match_end_utc)
+        match_duration_datetime = match_end_datetime - match_start_datetime
+
+        # match_duration_sec = util.timestamp_to_sec(match_duration_datetime)
+
+        for P in range(1, 12):
+            metadata.append(
+                {"id": str(match_id), "start_time": "NONE", "duration": str(match_duration_datetime), "type": "match",
+                 "match_id": str(i), "perspective": "P" + str(P), "stream_file": "2018-03-03_P" + str(P) + ".mp4",
+                 "stream_timestamp": "NONE", "UTC_timestamp": str(match_start_utc)})
+            match_id = match_id + 1
+
+    try:
+        with open('test-metadata.csv', mode='w', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=metadata_columns)
+            writer.writeheader()
+            for data in metadata:
+                writer.writerow(data)
+    except IOError:
+        print("I/O error")
+
+    print("finished")
+
+
+# prepare_testset_csv()
 
 for match in range(match_start, match_end + 1):
     # 10.json is not correct!
@@ -26,7 +74,7 @@ for match in range(match_start, match_end + 1):
             writer = csv.writer(file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(['match', 'round', 'round_begin', 'frame_nr'])
 
-        json_file = open(base_dir + '/timelines/' + str(match) + '.json')
+        json_file = open(timelines_dir + str(match) + '.json')
         all_rounds_data = TimelineReader.preprocess(json.load(json_file))
         score_map = TimelineReader.get_score_map_for_match(all_rounds_data)
 
@@ -34,7 +82,7 @@ for match in range(match_start, match_end + 1):
         scoreCT, scoreTerrorist = 0, 0
 
         for j in range(1, len(score_map) + 1):
-            round_start_utc_string = all_rounds_data[roundNr]['round_start'][0]['date']
+            round_start_utc_string = all_rounds_data[roundNr]['round_start'][-1]['date']
             round_start_utc_time = util.get_datetime_from_utc_string(round_start_utc_string)
 
             stream_begin_row = util.get_match_begin_in_player_stream(match, metadata_csv,
