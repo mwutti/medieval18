@@ -41,6 +41,18 @@ def read_metadata_csv():
                 line = line + 1
     return metadata
 
+def read_metadata_test_set_csv():
+    metadata = []
+    with open(base_dir + '/data/metadata-test-set.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        line = 0
+        for row in reader:
+            if line > 0:
+                metadata.append(row)
+            else:
+                line = line + 1
+    return metadata
+
 
 def get_datetime_from_utc_string(string):
     filteredString = string.split('+')[0].replace('T', ' ')
